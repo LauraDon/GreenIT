@@ -152,17 +152,17 @@ main {
 
 /* Positionnement des boîtes en quinconce */
 .box1 {
-    left: -100px;
-    top: 0;
+    left: 0px;
+    top: -30px;
 }
 
 .box2 {
-    right: 0;
-    top: 0;
+    right: 230px;
+    top: -30px;
 }
 
 .box3 {
-    left: 100;
+    left: 210px;
     top: 180px; /* Ajuster cette valeur selon la hauteur de vos boîtes */
 }
 
@@ -180,22 +180,22 @@ main {
 }
 
 .line1 {
-    left: 22%;
+    left: 122px;
     top: 105px;
 }
 
 .line2 {
-    right: 22%;
+    right: 353px;
     top: 105px;
 }
 
 .line3 {
-    left: 22%;
+    left: 335px;
     top: 140px; /* Ajuster selon la position de box3 */
 }
 
 .line4 {
-    right: 22%;
+    right: 122px;
     top: 140px; /* Ajuster selon la position de box4 */
 }
 
@@ -218,25 +218,25 @@ main {
 }
 
 .dot1 {
-    left: 21.5%;
+    left: 117px;
 }
 
 .dot2 {
-    left: 40%;
+    left: 540px;
 }
 
 .dot3 {
-    left: 60%;
+    left: 330px;
 }
 
 .dot4 {
-    left: 78%;
+    left: 771px;
 }
 
 .timeline-arrow {
     position: absolute;
     right: -8px;
-    top: 136px;
+    top: -4.5px;
     width: 0;
     height: 0;
     border-left: 12px solid var(--primary-color);
