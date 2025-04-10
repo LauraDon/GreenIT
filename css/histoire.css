@@ -1,0 +1,302 @@
+/* Couleurs principales */
+:root {
+    --primary-color: #5e3577; /* Couleur principale violet */
+    --light-purple: #d6c5de; /* Couleur des boîtes */
+    --bg-color: #f9f5f2; /* Couleur de fond */
+    --text-color: #333; /* Couleur du texte */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header et Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container a img {
+    width: 60px;
+    height: auto;
+}
+
+.logo-text h1 {
+    font-size: 32px;
+    margin-left: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #8050a7;
+    font-weight: 600;
+}
+
+/* Main Content */
+main {
+    padding: 20px 0;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 36px;
+    color: var(--primary-color);
+    margin: 40px 0 20px;
+}
+
+.intro-text {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* Timeline Layout */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px auto;
+    max-width: 900px;
+    position: relative;
+}
+
+.left-content {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    padding-left: 80px;
+}
+
+.philippines-map {
+    max-width: 200px;
+    height: auto;
+    opacity: 0.8;
+}
+
+.right-content {
+    width: 100%;
+    position: relative;
+}
+
+/* Timeline Boxes en quinconce */
+.timeline-boxes {
+    position: relative;
+    margin: 60px 0;
+}
+
+.timeline-box {
+    background-color: var(--light-purple);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 45%;
+    max-width: 250px;
+}
+
+.timeline-box h3 {
+    font-size: 16px;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.timeline-box p {
+    font-size: 13px;
+    color: var(--text-color);
+}
+
+/* Positionnement des boîtes en quinconce */
+.box1 {
+    left: -100px;
+    top: 0;
+}
+
+.box2 {
+    right: 0;
+    top: 0;
+}
+
+.box3 {
+    left: 100;
+    top: 180px; /* Ajuster cette valeur selon la hauteur de vos boîtes */
+}
+
+.box4 {
+    right: 0;
+    top: 180px; /* Ajuster cette valeur selon la hauteur de vos boîtes */
+}
+
+/* Lignes verticales qui connectent les boîtes à la timeline */
+.vertical-line {
+    position: absolute;
+    width: 2px;
+    background-color: var(--primary-color);
+    height: 40px;
+}
+
+.line1 {
+    left: 22%;
+    top: 105px;
+}
+
+.line2 {
+    right: 22%;
+    top: 105px;
+}
+
+.line3 {
+    left: 22%;
+    top: 140px; /* Ajuster selon la position de box3 */
+}
+
+.line4 {
+    right: 22%;
+    top: 140px; /* Ajuster selon la position de box4 */
+}
+
+/* Timeline horizontale avec points */
+.timeline-line {
+    position: absolute;
+    height: 4px;
+    background-color: var(--primary-color);
+    width: 100%;
+    top: 200px; /* Positionnement entre les deux rangées de boîtes */
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    top: -5px; /* Centré sur la ligne horizontale */
+}
+
+.dot1 {
+    left: 21.5%;
+}
+
+.dot2 {
+    left: 40%;
+}
+
+.dot3 {
+    left: 60%;
+}
+
+.dot4 {
+    left: 78%;
+}
+
+.timeline-arrow {
+    position: absolute;
+    right: -8px;
+    top: 136px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid var(--primary-color);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 12px;
+    color: #777;
+    margin-top: 300px; /* Augmenter pour laisser de l'espace sous la timeline */
+    border-top: 1px solid #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .logo-container {
+        margin-bottom: 20px;
+    }
+    
+    nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    nav ul li {
+        margin: 5px 10px;
+    }
+    
+    .timeline-box {
+        position: relative;
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px;
+        left: auto;
+        right: auto;
+        top: auto;
+    }
+    
+    .box1, .box2, .box3, .box4 {
+        top: auto;
+    }
+    
+    .vertical-line, .timeline-line, .timeline-dot, .timeline-arrow {
+        display: none;
+    }
+    
+    .timeline-boxes {
+        margin: 20px 0;
+    }
+    
+    footer {
+        margin-top: 40px;
+    }
+}
