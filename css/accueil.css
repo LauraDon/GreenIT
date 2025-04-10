@@ -1,0 +1,11 @@
+header img {
+  height: 7%;
+  width: 10%;
+  border-radius: 80px;
+  text-shadow: 2px 2px 4px black;
+}
+
+a {
+  text-decoration-line: none;
+  border-radius: 3px;
+}
