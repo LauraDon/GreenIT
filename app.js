@@ -7,7 +7,15 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use('/css', express.static(__dirname + '/css'));
+app.use('/js', express.static(__dirname + '/js'));
+app.use('/img', express.static(__dirname + '/img'));
+app.use('/html', express.static(__dirname + '/html'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/html/index.html');
+});
+
 
 const database = db.initializeDatabase();
 
@@ -59,5 +67,5 @@ app.get('/api/recommandations/meilleures', async(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Serveur en écoute sur le port ${port}`);
+    console.log(`Serveur en écoute sur http://localhost:${port}`);
 });

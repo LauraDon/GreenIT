@@ -1,0 +1,36 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.recette-card {
+    width: 300px;
+    background-color: #f9f5f7;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recette-card img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.btn-ajouter {
+    display: inline-block;
+    margin: 2rem;
+    padding: 1rem 2rem;
+    background-color: #8E7692;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-ajouter:hover {
+    background-color: #78657c;
+}
