@@ -55,6 +55,17 @@ app.post('/api/recettes', async(req, res) => {
     }
 });
 
+app.get('/api/recommandations', async(req, res) => {
+    try {
+        const recommandations = await db.getAllRecommandations(database);
+        res.json(recommandations);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erreur serveur' });
+    }
+});
+
+
 app.get('/api/recommandations/meilleures', async(req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 5;

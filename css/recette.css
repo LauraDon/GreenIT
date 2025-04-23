@@ -71,6 +71,11 @@ h2 {
     right: -2rem;
 }
 
+.btn-ajouter {
+    color: #482A41;
+    cursor: pointer;
+}
+
 .fiche-recette {
     position: absolute;
     right: -340px;

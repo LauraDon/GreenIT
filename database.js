@@ -126,6 +126,24 @@ function addRecette(db, recetteData, userId) {
     });
 }
 
+function getAllRecommandations(db) {
+    return new Promise((resolve, reject) => {
+        db.all(`
+          SELECT r.*, u.nomUtilisateur as auteur
+          FROM RECOMMANDATION r
+          JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+          ORDER BY r.dateCreation DESC
+        `, (err, rows) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+}
+
+
 function getMeilleuresRecommandations(db, limit = 5) {
     return new Promise((resolve, reject) => {
         db.all(`
