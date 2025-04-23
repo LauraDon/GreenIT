@@ -9,6 +9,7 @@ body {
   background-color: #f9f5f2;
   color: #333;
   line-height: 1.6;
+  overflow-y: scroll;
 }
 
 .container {
