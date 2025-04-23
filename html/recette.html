@@ -21,25 +21,39 @@
                     <li><a href="/html/bienfait.html">Bienfaits</a></li>
                     <li><a href="/html/histoire.html">Histoire</a></li>
                     <li><a href="/html/recommendation.html">Recommandations</a></li>
-                    <li><a href=#>A propos</a></li>
+                    <li><a href=/html/apropos.html>A propos</a></li>
                 </ul>
             </nav>
         </header>
 
         <main class="hero">
             <h2>Nos recettes à base d'ube</h2>
-            <p class="subtitle">Pâtisseries, boissons et douceurs maison<br> Découvre des recettes et histoires autour de l'ube violet.</p>
+            <p class="subtitle">Pâtisseries, boissons et douceurs maison</p>
 
-            <div id="recettes-container" class="grid"></div>
+            <div class="recette-zone">
+                <div class="carrousel-box">
+                    <button class="carousel-btn left">&#10094;</button>
+                    <div class="carousel" id="carousel"></div>
+                    <button class="carousel-btn right">&#10095;</button>
+                </div>
 
-            <script src="/js/recette.js"></script>
-            <a href="/html//ajout.html" class="btn-ajouter">+ Ajouter une recette</a>
+                <div class="fiche-recette" id="fiche-recette">
+                    <h3 id="titre-recette">Titre</h3>
+                    <ul id="liste-ingredients"></ul>
+                </div>
+            </div>
+
+            <div class="miniatures" id="miniatures"></div>
+
+
+            <a href="/html/ajout.html" class="btn-ajouter">+ Ajouter une recette</a>
         </main>
 
         <footer>
             <p>© 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET</p>
         </footer>
     </div>
+    <script src="/js/recette.js"></script>
 </body>
 
 </html>

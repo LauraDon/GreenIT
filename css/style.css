@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #f9f5f2;
+    background-color: #F3ECE8;
     color: #333;
     line-height: 1.6;
 }
@@ -16,9 +16,6 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-
-
-/* Header et Navigation */
 
 header {
     display: flex;
@@ -33,16 +30,8 @@ header {
 }
 
 .logo img {
-    width: 140px;
+    width: 130px;
     height: auto;
-}
-
-.logo h1 {
-    font-size: 32px;
-    margin-left: 10px;
-    color: #5e3577;
-    font-weight: 500;
-    font-style: italic;
 }
 
 nav ul {
@@ -56,8 +45,8 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #5e3577;
-    font-weight: 500;
+    color: #533976;
+    font-weight: 600;
     font-size: 18px;
     transition: all 0.3s ease;
 }
@@ -66,9 +55,6 @@ nav ul li a:hover {
     color: #8050a7;
 }
 
-
-/* Footer */
-
 footer {
     text-align: center;
     padding: 20px 0;
@@ -76,9 +62,6 @@ footer {
     color: #777;
     margin-top: 40px;
 }
-
-
-/* Adaptation pour les mobiles */
 
 @media (max-width: 768px) {
     header {

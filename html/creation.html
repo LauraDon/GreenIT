@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubelicious - Créer un compte</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/creation.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/html/recette.html">Recettes</a></li>
+                <li><a href="/html/bienfait.html">Bienfaits</a></li>
+                <li><a href="/html/histoire.html">Histoire</a></li>
+                <li><a href="/html/recommendation.html">Recommandations</a></li>
+                <li><a href="/html/apropos.html">A propos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            <h2>Créer un compte</h2>
+
+            <form class="signup-form">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+
+                <button type="submit" class="btn-connect">Se connecter</button>
+            </form>
+
+            <div class="login-link">
+                <span>Déjà un compte ?</span>
+                <a href="#" class="connect-link">Se connecter</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARQUET</p>
+        </footer>
+    </div>
+</body>
+
+</html>
