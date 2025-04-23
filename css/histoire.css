@@ -1,26 +1,9 @@
-:root {
-    --primary-color: #482A41;
-    --light-purple: #d6c5de;
-    --bg-color: #f9f5f2;
-    --text-color: #333;
-    /
-}
-
-h2 {
-    font-weight: 500;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 .main-title {
     text-align: center;
-    font-size: 36px;
-    color: var(--primary-color);
-    margin: 40px 0 20px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #482A41;
+    margin-bottom: 1rem;
 }
 
 .intro-text {
@@ -64,7 +47,7 @@ h2 {
 }
 
 .timeline-box {
-    background-color: var(--light-purple);
+    background-color: #d6c5de;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
@@ -76,14 +59,14 @@ h2 {
 
 .timeline-box h3 {
     font-size: 16px;
-    color: var(--primary-color);
+    color: #482A41;
     margin-bottom: 8px;
     font-weight: 600;
 }
 
 .timeline-box p {
     font-size: 13px;
-    color: var(--text-color);
+    color: #333;
 }
 
 .box1 {
@@ -109,7 +92,7 @@ h2 {
 .vertical-line {
     position: absolute;
     width: 2px;
-    background-color: var(--primary-color);
+    background-color: #482A41;
     height: 40px;
 }
 
@@ -136,7 +119,7 @@ h2 {
 .timeline-line {
     position: absolute;
     height: 4px;
-    background-color: var(--primary-color);
+    background-color: #482A41;
     width: 100%;
     top: 200px;
 }
@@ -145,7 +128,7 @@ h2 {
     position: absolute;
     width: 12px;
     height: 12px;
-    background-color: var(--primary-color);
+    background-color: #482A41;
     border-radius: 50%;
     top: -5px;
 }
@@ -172,7 +155,7 @@ h2 {
     top: -3px;
     width: 0;
     height: 0;
-    border-left: 12px solid var(--primary-color);
+    border-left: 12px solid #482A41;
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
 }
