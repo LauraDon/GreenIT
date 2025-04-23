@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajouter une recette</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/reco_ajout.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <a href="/html/index.html"
+            ><img
+              src="/img/ubelicious_logo.png"
+              alt="Ubelicious logo - Tasse avec coeur"
+          /></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/html/recette.html">Recettes</a></li>
+            <li><a href="/html/bienfait.html">Bienfaits</a></li>
+            <li><a href="/html/histoire.html">Histoire</a></li>
+            <li><a href="/html/recommandation.html">Recommandations</a></li>
+            <li><a href="/html/apropos.html">A propos</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>Ajouter un lieu</h1>
+        <form id="form-recommandation">
+          <input type="text" name="titre" placeholder="Titre" required />
+          <textarea
+            name="description"
+            placeholder="Adresse"
+            required
+          ></textarea>
+          <textarea
+            name="commendataire"
+            placeholder="Commentaire"
+            required
+          ></textarea>
+
+          <button type="submit">Ajouter le lieu</button>
+          <p id="message"></p>
+        </form>
+      </main>
+    </div>
+
+    <script src="/js/reco_ajout.js"></script>
+  </body>
+</html>
