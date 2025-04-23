@@ -1,8 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,21 +11,22 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 0 20px;
 }
 
+
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo img {
@@ -34,13 +34,21 @@ header {
     height: auto;
 }
 
+.logo h1 {
+  font-size: 32px;
+  margin-left: 10px;
+  color: #5e3577;
+  font-weight: 500;
+  font-style: italic;
+}
+
 nav ul {
-    display: flex;
-    list-style: none;
+  display: flex;
+  list-style: none;
 }
 
 nav ul li {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 
 nav ul li a {
@@ -52,36 +60,36 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #8050a7;
+  color: #8050a7;
 }
 
 footer {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    color: #777;
-    margin-top: 40px;
+  text-align: center;
+  padding: 0 0;
+  font-size: 14px;
+  color: #777;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-    nav ul {
-        margin-top: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    nav ul li {
-        margin: 5px 15px;
-    }
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    .btn {
-        width: 80%;
-        margin-bottom: 10px;
-    }
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+  nav ul {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav ul li {
+    margin: 5px 15px;
+  }
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn {
+    width: 80%;
+    margin-bottom: 10px;
+  }
 }

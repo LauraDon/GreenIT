@@ -1,0 +1,83 @@
+main {
+  text-align: center;
+}
+
+.hero {
+  text-align: center;
+  padding: 10px 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: #572e54;
+  text-align: left;
+}
+
+.hero p {
+  text-align: left;
+  font-size: 18px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.login-box {
+  padding: 2rem;
+  width: 400px;
+}
+
+.login-box h3 {
+  margin-bottom: 1rem;
+  color: #572e54;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: #ceb2bd;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 15px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.link {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #572e54;
+  text-decoration: none;
+}
+
+.register {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.register a {
+  color: #572e54;
+  text-decoration: none;
+}
