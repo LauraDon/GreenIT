@@ -1,0 +1,102 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #482A41;
+    margin-bottom: 1rem;
+}
+
+.signup-form {
+    width: 50%;
+    max-width: 500px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #E2D2C8;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-connect {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    background-color: #8E7692;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-link {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.connect-link {
+    color: #8e7399;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.connect-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .menu {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .menu li {
+        margin: 0 10px 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .login-link {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
