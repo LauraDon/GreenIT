@@ -2,8 +2,8 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ubelicious - Accueil</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/accueil.css">
@@ -13,44 +13,250 @@
 
 <body>
     <div class="container">
-        <header>
-            <div class="logo">
-                <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/html/recette.html">Recettes</a></li>
-                    <li><a href="/html/bienfait.html">Bienfaits</a></li>
-                    <li><a href="/html/histoire.html">Histoire</a></li>
-                    <li><a href="/html/recommendation.html">Recommandations</a></li>
-                    <li><a href=/html/apropos.html>A propos</a></li>
-                </ul>
-            </nav>
-        </header>
+        <section class="image">
+            <header>
+                <div class="logo">
+                    <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#recette">Recettes</a></li>
+                        <li><a href="#bienfait">Bienfaits</a></li>
+                        <li><a href="#histoire">Histoire</a></li>
+                        <li><a href="/html/recommandation.html">Recommandations</a></li>
+                        <li><a href="/html/apropos.html">A propos</a></li>
+                        <li><a href="/html/connexion.html">Compte</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-        <main class="hero">
-            <h2>Ubelicious.</h2>
-            <h3>L'ube dans tous ses états.</h3>
-            <p class="subtitle">Glaces, pâtisseries, boissons... <br> Découvre des recettes et histoires autour de l'ube violet.</p>
+            <main class="hero">
+                <div id="accueil">
+                    <h2>UBELICIOUS.</h2>
+                    <h3>L'ube dans tous ses états.</h3>
+                    <p class="subtitle">
+                        Glaces, pâtisseries, boissons... <br /> Découvre des recettes et histoires autour de l'ube violet.
+                    </p>
+        </section>
+        <div class="description">
+            <div id="bleu_square">
+                <div>
+                    <p>
+                        Que tu sois un grand amateur d'ube ou simplement curieux de découvrir cette racine à la couleur envoûtante, Ubelicious est fait pour toi.
+                    </p>
 
-            <div class="description">
-                <p>Que tu sois un grand amateur d'ube ou simplement curieux de découvrir cette racine à la couleur envoûtante, Ubelicious est fait pour toi.</p>
+                    <p>
+                        À travers ce site, découvre ses bienfaits, son histoire, des recettes illustrées et des recommandations pensées pour t'inspirer, régaler tes papilles et t'ouvrir à un univers aussi doux que créatif.
+                    </p>
 
-                <p>À travers ce site, découvre ses bienfaits, son histoire, des recettes illustrées et des recommandations pensées pour t'inspirer, régaler tes papilles et t'ouvrir à un univers aussi doux que créatif.</p>
-
-                <p>Bienvenue dans un monde où le violet se croque avec tendresse.</p>
+                    <p>
+                        Bienvenue dans un monde où le violet se croque avec tendresse.
+                    </p>
+                </div>
+                <div>
+                    <img src="/img/ube_accueil.png" alt="Image Ube" />
+                </div>
             </div>
 
             <div class="buttons">
-                <a href="/html/recette.html" class="btn btn-primary">Voir les recettes</a>
-                <a href="/html/histoire.html" class="btn btn-secondary">Pourquoi l'ube ?</a>
+                <a href="#recette" class="btn btn-primary">Voir les recettes</a>
+                <a href="#histoire" class="btn btn-secondary">Pourquoi l'ube ?</a>
             </div>
-        </main>
+        </div>
 
-        <footer>
-            <p>© 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET</p>
-        </footer>
+
+        </div>
+
+
+        <div id="recette">
+            <h2>Nos recettes à base d'ube</h2>
+            <p class="subtitle" id="p">Pâtisseries, boissons et douceurs maison</p>
+            <img src="/img/image_recette_gauche.png" alt="Image décorative" />
+            <div class="recette-zone">
+                <div>
+                    <div class="carrousel-box">
+                        <button class="carousel-btn left">&#10094;</button>
+                        <div class="carousel" id="carousel"></div>
+                        <button class="carousel-btn right">&#10095;</button>
+                    </div>
+                    <div class="miniatures" id="miniatures"></div>
+                </div>
+
+                <div class="fiche-recette" id="fiche-recette">
+                    <h3 id="titre-recette">Titre</h3>
+                    <ul id="liste-ingredients"></ul>
+                </div>
+            </div>
+            <img src="/img/image_recette_droit.png" />
+
+            <a href="/html/ajout.html" class="btn btn-primary">Ajouter une recette</a
+          >
+        </div>
+
+        <div id="bienfait">
+          <section>
+            <div id="intro">
+              <h2>Les bienfaits de l'ube violet</h2>
+              <p class="subtitle">
+                Derrière sa couleur éclantante, l'ube cache de nombreuses
+                propriétés naturelles. <br> Entre antioxydants, fibres et vitamines,
+                il est aussi bon pour ton corps que pour ton moral.
+              </p>
+            </div>
+            <img src="/img/bienfait_gauche.png" alt="Image décorative" />
+
+            <div id="container">
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/sparkles.svg" />
+                    <h3>Antioxydant naturel</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Aide à protéger tes cellules du stress oxydatif</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/leaf.svg" />
+                    <h3>Riche en fibre</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Favorise le transit et la digestion naturelle</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/sun.svg" />
+                    <h3>Boost de vitamines</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Idéal pour l'immunité et une belle peau</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/zap.svg" />
+                    <h3>Apport en énergie</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Un snack naturel qui donne la pêche</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/sprout.svg" />
+                    <h3>100% naturel</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Sans colorants ni conservateurs</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-face card-front">
+                    <img src="/img/icone_svg/heart-pulse.svg" />
+                    <h3>Index glycémique modéré</h3>
+                  </div>
+                  <div class="card-face card-back">
+                    <p>Des desserts gourmands mais équilibrés</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img src="/img/bienfait_droit.png" alt="Image décorative" />
+          </section>
+        </div>
+
+        <div id="histoire">
+          <h2>L'histoire de l'ube violet</h2>
+
+          <div class="subtitle">
+            <p>
+              Originaire d'Asie du Sud-Est, l'ube (ou igname violet) est un
+              ingrédient précieux utilisé depuis des générations dans la cuisine
+              traditionnelle philippine. <br> Au-delà de sa couleur spectaculaire, il
+              raconte une histoire riche en saveurs, en culture et en
+              transmission.
+            </p>
+          </div>
+
+          <div class="timeline-container">
+            <div class="right-content">
+              <div class="timeline-boxes">
+                <div class="timeline-box box1">
+                  <h3>Origines en Asie du Sud-Est</h3>
+                  <p>
+                    La culture de l'ube débute il y a des siècles aux
+                    Philippines, où il est utilisé dans de nombreux desserts
+                    traditionnels.
+                  </p>
+                </div>
+
+                <div class="timeline-box box2">
+                  <h3>Intégration dans la pâtisserie moderne</h3>
+                  <p>
+                    L'ube devient un ingrédient prisé dans les pâtisseries
+                    artisanales, glaces et boissons.
+                  </p>
+                </div>
+
+                <div class="timeline-box box3">
+                  <h3>Transmission culturelle</h3>
+                  <p>
+                    L'ube est transmis de génération en génération,
+                    principalement par les femmes en cuisine, dans un cadre
+                    familial et festif.
+                  </p>
+                  </div>
+
+                <div class="timeline-box box4">
+                  <h3>Popularité mondiale</h3>
+                  <p>
+                    L'ube connaît un essor international à travers le bubble
+                    tea, les mochis et les réseaux sociaux.
+                  </p>
+                </div>
+
+                <div class="vertical-line line1"></div>
+                <div class="vertical-line line2"></div>
+                <div class="vertical-line line3"></div>
+                <div class="vertical-line line4"></div>
+              </div>
+
+              <div class="timeline-line">
+                <div class="timeline-dot dot1"></div>
+                <div class="timeline-dot dot2"></div>
+                <div class="timeline-dot dot3"></div>
+                <div class="timeline-dot dot4"></div>
+                <div class="timeline-arrow"></div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </main>
     </div>
-</body>
-
+    <script src="/js/accueil.js"></script>
+  </body>
+  <footer>
+    <p>
+      © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS -
+      Anne Laure PARGUET
+    </p>
+  </footer>
 </html>

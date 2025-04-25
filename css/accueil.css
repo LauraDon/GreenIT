@@ -44,8 +44,9 @@
     margin-bottom: 20px;
 }
 
-
-/* Boutons */
+#bleu_square img {
+    height: 200px;
+}
 
 .buttons {
     display: flex;
