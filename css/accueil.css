@@ -4,17 +4,18 @@ html {
 
 .hero {
   text-align: center;
-  padding: 380px 0 0 150px;
+  padding: 300px 0 0 150px;
   margin: 0 0;
 }
 
 .hero h2 {
-  font-size: 36px;
+  font-size: 120px;
   color: #f0efeb;
   text-align: left;
-  font-weight: 500;
+  font-weight: 800;
   margin-bottom: -5px;
   margin-top: 10px;
+  font-family: "Playfair Display", serif;
 }
 
 .hero h3 {
@@ -65,7 +66,7 @@ html {
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 60px;
   margin-top: 10px;
 }
 
@@ -95,20 +96,20 @@ html {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.subtitle + img {
+#p + img {
   position: absolute;
   top: 1440px;
   left: 0;
   margin: 0;
   padding: 0;
-  width: 200px;
+  height: 500px;
 }
 
 .recette-zone {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 100px 0;
+  justify-content: center;
+  gap: 12rem;
+  margin: 100px 0 40px 0;
 }
 
 .recette-zone + img {
@@ -117,7 +118,7 @@ html {
   right: 0;
   margin: 0;
   padding: 0;
-  width: 200px;
+  height: 500px;
 }
 
 .carrousel-box {
@@ -249,13 +250,31 @@ html {
   margin-bottom: 2rem;
 }
 
+#intro + img {
+  position: absolute;
+  top: 2440px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 500px;
+}
+
 #container {
   display: grid;
   grid-template-columns: repeat(3, 13rem);
   justify-items: center;
   justify-content: center;
   margin-top: 70px;
-  gap: 10px;
+  gap: 20px;
+}
+
+#container + img {
+  position: absolute;
+  top: 2440px;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 500px;
 }
 
 .card {
@@ -341,7 +360,7 @@ html {
 .right-content {
   width: 100%;
   position: relative;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .timeline-boxes {
@@ -352,7 +371,7 @@ html {
 .timeline-box {
   background-color: #a8d0e6;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 15px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   position: absolute;
