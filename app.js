@@ -76,17 +76,6 @@ app.get('/api/recommandations', async(req, res) => {
     }
 });
 
-app.get('/api/recommandations/meilleures', async(req, res) => {
-    try {
-        const limit = parseInt(req.query.limit) || 5;
-        const recommandations = await db.getMeilleuresRecommandations(database, limit);
-        res.json(recommandations);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erreur serveur' });
-    }
-});
-
 
 // Ajouter une recommandation
 app.post('/api/recommandations', async(req, res) => {
@@ -182,4 +171,8 @@ app.post('/api/admin/login', async(req, res) => {
 
 app.listen(port, () => {
     console.log(`Serveur en écoute sur http://localhost:${port}`);
+});
+
+app.get('/', (req, res) => {
+    res.send('Bienvenue sur l’API Ubelicious  – Serveur opérationnel.');
 });

@@ -102,21 +102,6 @@ function getRecettes(db, limit = 10) {
     });
 }
 
-function searchRecettes(db, keyword) {
-    return new Promise((resolve, reject) => {
-        db.all(`
-      SELECT * FROM RECETTE 
-      WHERE titre LIKE ? OR description LIKE ? OR ingredients LIKE ?
-    `, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`], (err, rows) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
-}
-
 function addRecette(db, recetteData, userId) {
     return new Promise((resolve, reject) => {
         db.get('SELECT estAdmin FROM UTILISATEUR WHERE id_utilisateur = ?', [userId], (err, row) => {
@@ -208,29 +193,6 @@ function getAllRecommandations(db) {
 }
 
 
-function getMeilleuresRecommandations(db, limit = 5) {
-    return new Promise((resolve, reject) => {
-        db.all(`
-      SELECT r.*, u.nomUtilisateur as auteur, 
-             COALESCE(AVG(c.note), 0) as note_moyenne,
-             COUNT(c.id_commentaire) as nombre_commentaires
-      FROM RECOMMANDATION r
-      JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
-      LEFT JOIN COMMENTAIRE c ON r.id_recommandation = c.id_recommandation
-      GROUP BY r.id_recommandation
-      HAVING COUNT(c.id_commentaire) > 0
-      ORDER BY note_moyenne DESC
-      LIMIT ?
-    `, [limit], (err, rows) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
-}
-
 function getRecommandationsByUser(db, userId) {
     return new Promise((resolve, reject) => {
         db.all(`
@@ -277,10 +239,6 @@ async function main() {
         }
 
 
-        // Récupérer les meilleures recommandations
-        const recommandations = await getMeilleuresRecommandations(db);
-        console.log('Meilleures recommandations:', recommandations);
-
     } catch (error) {
         console.error('Erreur:', error);
     } finally {
@@ -304,10 +262,8 @@ module.exports = {
     getUtilisateurs,
     createUtilisateur,
     getRecettes,
-    searchRecettes,
     addRecette,
     addRecommandation,
-    getMeilleuresRecommandations,
     getUtilisateurByEmail,
     deleteRecette,
     deleteRecommandation,
