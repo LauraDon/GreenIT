@@ -53,6 +53,37 @@ function getUtilisateurs(db) {
     });
 }
 
+function getUtilisateurByEmail(db, email) {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT * FROM UTILISATEUR WHERE email = ?', [email], (err, row) => {
+            if (err) reject(err);
+            else resolve(row);
+        });
+    });
+}
+
+function createUtilisateur(db, nom, prenom, email, password) {
+    return new Promise((resolve, reject) => {
+        db.run(`
+            INSERT INTO UTILISATEUR (nom_user, prenom_user, nomUtilisateur, email, mdp, estAdmin)
+            VALUES (?, ?, ?, ?, ?, 0)
+        `, [nom, prenom, `${prenom}.${nom}`.toLowerCase(), email, password], function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve({
+                    id_utilisateur: this.lastID,
+                    nom_user: nom,
+                    prenom_user: prenom,
+                    email,
+                    estAdmin: 0
+                });
+            }
+        });
+    });
+}
+
+
 function getRecettes(db, limit = 10) {
     return new Promise((resolve, reject) => {
         db.all(`
@@ -126,6 +157,39 @@ function addRecette(db, recetteData, userId) {
     });
 }
 
+function addRecommandation(db, recommandation) {
+    const { titre, lieu, contenu, id_utilisateur } = recommandation;
+
+    return new Promise((resolve, reject) => {
+        db.run(`
+            INSERT INTO RECOMMANDATION (titre, lieu, contenu, id_utilisateur, dateCreation)
+            VALUES (?, ?, ?, ?, datetime('now'))
+        `, [titre, lieu, contenu, id_utilisateur], function(err) {
+            if (err) reject(err);
+            else resolve(this.lastID);
+        });
+    });
+}
+
+
+function deleteRecette(db, id) {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM RECETTE WHERE id_recette = ?", [id], function(err) {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
+}
+
+function deleteRecommandation(db, id) {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM RECOMMANDATION WHERE id_recommandation = ?", [id], function(err) {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
+}
+
 function getAllRecommandations(db) {
     return new Promise((resolve, reject) => {
         db.all(`
@@ -167,6 +231,21 @@ function getMeilleuresRecommandations(db, limit = 5) {
     });
 }
 
+function getRecommandationsByUser(db, userId) {
+    return new Promise((resolve, reject) => {
+        db.all(`
+            SELECT r.*, u.nomUtilisateur as auteur
+            FROM RECOMMANDATION r
+            JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+            WHERE r.id_utilisateur = ?
+            ORDER BY r.dateCreation DESC
+        `, [userId], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
 async function main() {
     const db = initializeDatabase();
 
@@ -197,10 +276,6 @@ async function main() {
             }
         }
 
-        /* Rechercher des recettes contenant "pommes"
-        const recettesAvecPommes = await searchRecettes(db, 'pommes');
-        console.log('Recettes avec pommes:', recettesAvecPommes);
-        */
 
         // Récupérer les meilleures recommandations
         const recommandations = await getMeilleuresRecommandations(db);
@@ -219,6 +294,7 @@ async function main() {
     }
 }
 
+
 if (require.main === module) {
     main();
 }
@@ -226,8 +302,15 @@ if (require.main === module) {
 module.exports = {
     initializeDatabase,
     getUtilisateurs,
+    createUtilisateur,
     getRecettes,
     searchRecettes,
     addRecette,
-    getMeilleuresRecommandations
+    addRecommandation,
+    getMeilleuresRecommandations,
+    getUtilisateurByEmail,
+    deleteRecette,
+    deleteRecommandation,
+    getRecommandationsByUser,
+    getAllRecommandations
 };

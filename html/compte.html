@@ -1,90 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ubelicious - Recommandations</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/compte.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
 
-  <body>
+<body>
     <header>
-      <div class="logo">
-        <a href="/html/index.html"
-          ><img
-            src="/img/ubelicious_logo.png"
-            alt="Ubelicious logo - Tasse avec coeur"
-        /></a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="/html/index.html#recette">Recettes</a></li>
-          <li><a href="/html/index.html#bienfait">Bienfaits</a></li>
-          <li><a href="/html/index.html#histoire">Histoire</a></li>
-          <li><a href="/html/recommandation.html">Recommandations</a></li>
-          <li><a href="/html/apropos.html">A propos</a></li>
-          <li><a href="/html/connexion.html">Compte</a></li>
-        </ul>
-      </nav>
+        <div class="logo">
+            <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/html/index.html#recette">Recettes</a></li>
+                <li><a href="/html/index.html#bienfait">Bienfaits</a></li>
+                <li><a href="/html/index.html#histoire">Histoire</a></li>
+                <li><a href="/html/recommandation.html">Recommandations</a></li>
+                <li><a href="/html/apropos.html">A propos</a></li>
+                <li><a href="/html/connexion.html">Compte</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-      <div class="hero">
-        <h2>Créer un compte</h2>
-      </div>
-
-      <div class="login-container">
-        <div class="login-box">
-          <input type="text" id="nom" name="nom" required placeholder="Nom" />
-          <input
-            type="text"
-            id="prenom"
-            name="prenom"
-            required
-            placeholder="Prénom"
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            placeholder="Mot de passe"
-          />
-          <input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            required
-            placeholder="Confirmer le mot de passe"
-          />
-          <button type="submit" class="btn-connect">Se connecter</button>
-
-          <p class="register">
-            Déjà un compte ?
-            <a href="/html/connexion.html">Connectez-vous !</a>
-          </p>
+        <div class="hero">
+            <h2>Créer un compte</h2>
         </div>
-      </div>
+
+        <div class="login-container">
+            <div class="login-box">
+                <input type="text" id="nom" name="nom" required placeholder="Nom" />
+                <input type="text" id="prenom" name="prenom" required placeholder="Prénom" />
+                <input type="email" id="email" name="email" required placeholder="Email" />
+                <input type="password" id="password" name="password" required placeholder="Mot de passe" />
+                <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirmer le mot de passe" />
+                <button type="submit" class="btn-connect">Se connecter</button>
+
+                <p class="register">
+                    Déjà un compte ?
+                    <a href="/html/connexion.html">Connectez-vous !</a>
+                </p>
+            </div>
+        </div>
     </main>
 
     <footer>
-      <p>
-        © 2024 Loriana RATOVO – Laura DONATO – Maël CASTELLAN – Rémi DESJARDINS
-        – Anne Laure PARQUET
-      </p>
+        <p>
+            © 2024 Loriana RATOVO – Laura DONATO – Maël CASTELLAN – Rémi DESJARDINS – Anne Laure PARQUET
+        </p>
     </footer>
     <script src="/js/compte.js"></script>
-  </body>
+    <script src="/js/header.js" defer></script>
+
+</body>
+
 </html>

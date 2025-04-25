@@ -1,67 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <title>Ajouter une recette</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/ajout.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
 
-  <body>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
+        </div>
+    </header>
     <h1>Ajouter une recette</h1>
 
     <form id="form-recette">
-      <input
-        type="text"
-        name="titre"
-        placeholder="Titre de la recette"
-        required
-      />
-      <textarea
-        name="description"
-        placeholder="Description"
-        required
-      ></textarea>
-      <input
-        type="text"
-        name="urlImage"
-        placeholder="Lien de l’image (.jpg, .png)"
-        required
-      />
-      <input
-        type="text"
-        name="tempsPreparation"
-        placeholder="Temps de préparation (ex : 30 min)"
-      />
-      <input
-        type="text"
-        name="tempsCuisson"
-        placeholder="Temps de cuisson (ex : 40 min)"
-      />
-      <input
-        type="text"
-        name="niveau_difficulte"
-        placeholder="Niveau (Facile, Moyen, Difficile)"
-      />
-      <textarea
-        name="ingredients"
-        placeholder="Ingrédients (un par ligne)"
-        required
-      ></textarea>
-      <textarea
-        name="etapes"
-        placeholder="Étapes de la recette (numérotées)"
-        required
-      ></textarea>
+        <input type="text" name="titre" placeholder="Titre de la recette" required />
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="text" name="urlImage" placeholder="Lien de l’image (.jpg, .png)" required />
+        <input type="text" name="tempsPreparation" placeholder="Temps de préparation (ex : 30 min)" />
+        <input type="text" name="tempsCuisson" placeholder="Temps de cuisson (ex : 40 min)" />
+        <input type="text" name="niveau_difficulte" placeholder="Niveau (Facile, Moyen, Difficile)" />
+        <textarea name="ingredients" placeholder="Ingrédients (un par ligne)" required></textarea>
+        <textarea name="etapes" placeholder="Étapes de la recette (numérotées)" required></textarea>
 
-      <button type="submit">Ajouter la recette</button>
-      <p id="message"></p>
+        <button type="submit">Ajouter la recette</button>
+        <p id="message"></p>
     </form>
 
     <script src="/js/ajout.js"></script>
-  </body>
+</body>
+
 </html>
