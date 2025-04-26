@@ -12,45 +12,58 @@
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/html/recette.html">Recettes</a></li>
-                    <li><a href="/html/bienfait.html">Bienfaits</a></li>
-                    <li><a href="/html/histoire.html">Histoire</a></li>
-                    <li><a href="/html/recommendation.html">Recommandations</a></li>
-                    <li><a href="/html/apropos.html">A propos</a></li>
-                </ul>
-            </nav>
-        </header>
-        <div class="apropos-container">
-            <h1>À propos d'Ubelicious</h1>
-
-            <p class="intro">
-                Ubelicious est un site vitrine créé pour valoriser un ingrédient original, naturel et visuellement unique : l’ube violet.<br> Ce projet allie passion pour la gourmandise, envie de faire découvrir des recettes venues d’ailleurs, et sensibilité
-                à un web plus respectueux de l’environnement.
-            </p>
-
-            <h2>Un site pensé pour être plus responsable</h2>
-
-            <ul>
-                <li><strong>Design léger :</strong> une interface simple, sans animations inutiles, pour réduire la charge des navigateurs</li>
-                <li><strong>Optimisation des images :</strong> compression des visuels et pas de vidéos intégrées pour limiter les requêtes lourdes.</li>
-                <li><strong>Pas de tracking ni publicité :</strong> respect de la vie privée = moins de scripts = site plus léger.</li>
-                <li><strong>Accessibilité pensée :</strong> structure claire, texte lisible, contraste suffisant.</li>
-            </ul>
-            <a href="/html/creation.html">creer</a>
+    <header>
+        <div class="logo">
+            <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
         </div>
+        <nav id="navbar">
+            <ul>
+                <li><a href="/html/index.html#recette">Recettes</a></li>
+                <li><a href="/html/index.html#bienfait">Bienfaits</a></li>
+                <li><a href="/html/index.html#histoire">Histoire</a></li>
+                <li><a href="/html/recommandation.html">Recommandations</a></li>
+                <li><a href="/html/apropos.html">A propos</a></li>
+                <li><a href="#" id="link-compte">Compte</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
+        <button class="hamburger" aria-label="Menu">&#9776;</button>
+    </header>
 
-        <footer>
-            <p>
-                © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET
-            </p>
-        </footer>
+    <main>
+        <h2>À propos d'Ubelicious</h2>
+
+        <p class="intro">
+            Ubelicious est un site vitrine créé pour valoriser un ingrédient original, naturel et visuellement unique : l’ube violet.<br> Ce projet allie passion pour la gourmandise, envie de faire découvrir des recettes venues d’ailleurs, et sensibilité
+            à un web plus respectueux de l’environnement.
+        </p>
+
+        <h2>Un site pensé pour être plus responsable</h2>
+
+        <ul>
+            <li id="green1">
+                <img src="/img/green_1.png" alt="Image décorative GreenIT" />
+                <p>
+                    <strong>Design léger</strong><br /> Une interface épurée et sans animations superflues pour alléger la charge du navigateur et améliorer les performances. <br /><br />
+                    <strong>Optimisation des images</strong> <br />Compression des visuels et absence de vidéos intégrées afin de réduire les requêtes lourdes et optimiser les performances.
+                </p>
+            </li>
+            <li id="green2">
+                <p>
+                    <strong>Pas de tracking ni publicité</strong><br /> Le respect de la vie privée, avec moins de scripts, rend le site plus léger et plus rapide. <br /><br />
+                    <strong>Accessibilité pensée</strong> <br />Une structure claire, un texte lisible et un contraste suffisant garantissent une lecture confortable et accessible.
+                </p>
+                <img src="/img/green_2.png" alt="Image décorative GreenIT" />
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>
+            © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET
+        </p>
+    </footer>
+    <script src="/js/header.js" defer></script>
 </body>
 
 </html>

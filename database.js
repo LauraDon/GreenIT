@@ -53,6 +53,37 @@ function getUtilisateurs(db) {
     });
 }
 
+function getUtilisateurByEmail(db, email) {
+    return new Promise((resolve, reject) => {
+        db.get('SELECT * FROM UTILISATEUR WHERE email = ?', [email], (err, row) => {
+            if (err) reject(err);
+            else resolve(row);
+        });
+    });
+}
+
+function createUtilisateur(db, nom, prenom, email, password) {
+    return new Promise((resolve, reject) => {
+        db.run(`
+            INSERT INTO UTILISATEUR (nom_user, prenom_user, nomUtilisateur, email, mdp, estAdmin)
+            VALUES (?, ?, ?, ?, ?, 0)
+        `, [nom, prenom, `${prenom}.${nom}`.toLowerCase(), email, password], function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve({
+                    id_utilisateur: this.lastID,
+                    nom_user: nom,
+                    prenom_user: prenom,
+                    email,
+                    estAdmin: 0
+                });
+            }
+        });
+    });
+}
+
+
 function getRecettes(db, limit = 10) {
     return new Promise((resolve, reject) => {
         db.all(`
@@ -62,21 +93,6 @@ function getRecettes(db, limit = 10) {
       ORDER BY r.dateCreation DESC
       LIMIT ?
     `, [limit], (err, rows) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
-}
-
-function searchRecettes(db, keyword) {
-    return new Promise((resolve, reject) => {
-        db.all(`
-      SELECT * FROM RECETTE 
-      WHERE titre LIKE ? OR description LIKE ? OR ingredients LIKE ?
-    `, [`%${keyword}%`, `%${keyword}%`, `%${keyword}%`], (err, rows) => {
             if (err) {
                 reject(err);
             } else {
@@ -126,6 +142,39 @@ function addRecette(db, recetteData, userId) {
     });
 }
 
+function addRecommandation(db, recommandation) {
+    const { titre, lieu, contenu, id_utilisateur } = recommandation;
+
+    return new Promise((resolve, reject) => {
+        db.run(`
+            INSERT INTO RECOMMANDATION (titre, lieu, contenu, id_utilisateur, dateCreation)
+            VALUES (?, ?, ?, ?, datetime('now'))
+        `, [titre, lieu, contenu, id_utilisateur], function(err) {
+            if (err) reject(err);
+            else resolve(this.lastID);
+        });
+    });
+}
+
+
+function deleteRecette(db, id) {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM RECETTE WHERE id_recette = ?", [id], function(err) {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
+}
+
+function deleteRecommandation(db, id) {
+    return new Promise((resolve, reject) => {
+        db.run("DELETE FROM RECOMMANDATION WHERE id_recommandation = ?", [id], function(err) {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
+}
+
 function getAllRecommandations(db) {
     return new Promise((resolve, reject) => {
         db.all(`
@@ -144,25 +193,17 @@ function getAllRecommandations(db) {
 }
 
 
-function getMeilleuresRecommandations(db, limit = 5) {
+function getRecommandationsByUser(db, userId) {
     return new Promise((resolve, reject) => {
         db.all(`
-      SELECT r.*, u.nomUtilisateur as auteur, 
-             COALESCE(AVG(c.note), 0) as note_moyenne,
-             COUNT(c.id_commentaire) as nombre_commentaires
-      FROM RECOMMANDATION r
-      JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
-      LEFT JOIN COMMENTAIRE c ON r.id_recommandation = c.id_recommandation
-      GROUP BY r.id_recommandation
-      HAVING COUNT(c.id_commentaire) > 0
-      ORDER BY note_moyenne DESC
-      LIMIT ?
-    `, [limit], (err, rows) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
+            SELECT r.*, u.nomUtilisateur as auteur
+            FROM RECOMMANDATION r
+            JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+            WHERE r.id_utilisateur = ?
+            ORDER BY r.dateCreation DESC
+        `, [userId], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
         });
     });
 }
@@ -197,14 +238,6 @@ async function main() {
             }
         }
 
-        /* Rechercher des recettes contenant "pommes"
-        const recettesAvecPommes = await searchRecettes(db, 'pommes');
-        console.log('Recettes avec pommes:', recettesAvecPommes);
-        */
-
-        // Récupérer les meilleures recommandations
-        const recommandations = await getMeilleuresRecommandations(db);
-        console.log('Meilleures recommandations:', recommandations);
 
     } catch (error) {
         console.error('Erreur:', error);
@@ -219,6 +252,7 @@ async function main() {
     }
 }
 
+
 if (require.main === module) {
     main();
 }
@@ -226,8 +260,13 @@ if (require.main === module) {
 module.exports = {
     initializeDatabase,
     getUtilisateurs,
+    createUtilisateur,
     getRecettes,
-    searchRecettes,
     addRecette,
-    getMeilleuresRecommandations
+    addRecommandation,
+    getUtilisateurByEmail,
+    deleteRecette,
+    deleteRecommandation,
+    getRecommandationsByUser,
+    getAllRecommandations
 };

@@ -21,7 +21,7 @@
             alt="Ubelicious logo - Tasse avec coeur"
         /></a>
       </div>
-      <nav>
+      <nav id="navbar">
         <ul>
           <li><a href="/html/index.html#recette">Recettes</a></li>
           <li><a href="/html/index.html#bienfait">Bienfaits</a></li>
@@ -29,8 +29,10 @@
           <li><a href="/html/recommandation.html">Recommandations</a></li>
           <li><a href="/html/apropos.html">A propos</a></li>
           <li><a href="/html/connexion.html">Compte</a></li>
+          <li><button id="logout-btn">Déconnexion</button></li>
         </ul>
       </nav>
+      <button class="hamburger" aria-label="Menu">&#9776;</button>
     </header>
 
     <main>
@@ -86,5 +88,6 @@
       </p>
     </footer>
     <script src="/js/compte.js"></script>
+    <script src="/js/header.js" defer></script>
   </body>
 </html>

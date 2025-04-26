@@ -1,9 +1,12 @@
+const utilisateur = JSON.parse(localStorage.getItem("user")) || {};
+
 document.addEventListener("DOMContentLoaded", async () => {
   const carousel = document.getElementById("carousel");
   const fiche = document.getElementById("fiche-recette");
   const titre = document.getElementById("titre-recette");
   const ingredientsList = document.getElementById("liste-ingredients");
   const miniatures = document.getElementById("miniatures");
+  const boutonSupprimer = document.getElementById("btn-supprimer-recette");
 
   let recettes = [];
   let currentIndex = 0;
@@ -20,10 +23,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const empty = document.createElement("div");
       empty.classList.add("empty-message");
       empty.innerHTML = `
-          <p class="no-recette">
-            Aucune recette disponible pour le moment.
-          </p>
-        `;
+        <p class="no-recette">
+          Aucune recette disponible pour le moment.
+        </p>
+      `;
       document.querySelector("main.hero").appendChild(empty);
       return;
     }
@@ -42,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       thumb.src = recette.urlImage;
       thumb.alt = recette.titre;
       thumb.classList.add("miniature");
+      thumb.dataset.index = index;
       thumb.addEventListener("click", () => showRecette(index));
       miniatures.appendChild(thumb);
     });
@@ -66,25 +70,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentIndex = index;
     const recette = recettes[index];
 
-    // Mise à jour image active
+    // Mettre à jour l'image active dans le carrousel principal
     document.querySelectorAll(".carousel-item").forEach((img, i) => {
       img.classList.toggle("active", i === index);
     });
 
-    // Mise à jour fiche recette
-    titre.innerHTML = recette.titre;
+    // Mettre à jour l'image active dans les miniatures
+    document.querySelectorAll(".miniature").forEach((thumb) => {
+      thumb.classList.remove("active");
+    });
+    const selectedMiniature = document.querySelector(
+      `.miniature[data-index="${index}"]`
+    );
+    if (selectedMiniature) selectedMiniature.classList.add("active");
 
+    // Mettre à jour le contenu de la fiche
+    titre.innerHTML = recette.titre;
     ingredientsList.innerHTML = "";
 
     const bloc = document.createElement("div");
     bloc.classList.add("fiche-details");
 
     bloc.innerHTML = `
-        <p><strong>Description :</strong> ${recette.description}</p>
-        <p><strong>Préparation :</strong> ${recette.tempsPreparation || "?"}</p>
-        <p><strong>Cuisson :</strong> ${recette.tempsCuisson || "?"}</p>
-        <p><strong>Difficulté :</strong> ${recette.niveau_difficulte || "?"}</p>
-        <p><strong>Ingrédients :</strong></p>
+          <p><strong>Description :</strong> ${recette.description}</p>
+          <p><strong>Préparation :</strong> ${
+            recette.tempsPreparation || "?"
+          }</p>
+          <p><strong>Cuisson :</strong> ${recette.tempsCuisson || "?"}</p>
+          <p><strong>Difficulté :</strong> ${
+            recette.niveau_difficulte || "?"
+          }</p>
+          <p><strong>Ingrédients :</strong></p>
       `;
 
     fiche.innerHTML = "";
@@ -92,7 +108,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     fiche.appendChild(bloc);
     fiche.appendChild(ingredientsList);
 
-    // Bonne découpe des ingrédients
     recette.ingredients.split(/\r?\n/).forEach((ingredient) => {
       if (ingredient.trim() !== "") {
         const li = document.createElement("li");
@@ -100,5 +115,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         ingredientsList.appendChild(li);
       }
     });
+
+    // Étapes à la ligne
+    const pEtapes = document.createElement("p");
+    pEtapes.innerHTML = `<strong>Étapes de préparation</strong><br>${recette.etapes.replace(
+      /\n/g,
+      "<br>"
+    )}`;
+    fiche.appendChild(pEtapes);
+
+    // Bouton supprimer pour admin
+    if (utilisateur.estAdmin === 1) {
+      boutonSupprimer.style.display = "inline-block";
+      boutonSupprimer.dataset.id = recette.id_recette;
+      fiche.appendChild(boutonSupprimer);
+    } else {
+      boutonSupprimer.style.display = "none";
+    }
   }
+});
+
+// Bouton "Ajouter une recette" visible seulement pour l'admin
+const boutonAjout = document.querySelector('a[href="/html/ajout.html"]');
+if (!utilisateur || !utilisateur.estAdmin) {
+  boutonAjout.style.display = "none";
+}
+
+const bouton = document.getElementById("btn-supprimer-recette");
+if (bouton) {
+  bouton.addEventListener("click", async () => {
+    const id = bouton.dataset.id;
+    const confirmation = confirm("Supprimer cette recette ?");
+    if (confirmation) {
+      const response = await fetch(`/api/recettes/${id}`, { method: "DELETE" });
+      if (response.ok) {
+        alert("Recette supprimée !");
+        location.reload();
+      } else {
+        alert("Erreur lors de la suppression");
+      }
+    }
+  });
+}
+
+const hamburger = document.querySelector(".hamburger");
+const navbar = document.getElementById("navbar");
+
+hamburger.addEventListener("click", () => {
+  navbar.classList.toggle("active");
 });

@@ -5,29 +5,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ubelicious - Accueil</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/accueil.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/accueil.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container">
+    <main>
         <section class="image">
             <header>
                 <div class="logo">
                     <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
                 </div>
-                <nav>
+                <nav id="navbar">
                     <ul>
                         <li><a href="#recette">Recettes</a></li>
                         <li><a href="#bienfait">Bienfaits</a></li>
                         <li><a href="#histoire">Histoire</a></li>
                         <li><a href="/html/recommandation.html">Recommandations</a></li>
                         <li><a href="/html/apropos.html">A propos</a></li>
-                        <li><a href="/html/connexion.html">Compte</a></li>
+                        <li><a href="#" id="link-compte">Compte</a></li>
+                        <li><button id="logout-btn">Déconnexion</button></li>
                     </ul>
                 </nav>
+                <button class="hamburger" aria-label="Menu">&#9776;</button>
             </header>
 
             <main class="hero">
@@ -83,13 +84,29 @@
                 </div>
 
                 <div class="fiche-recette" id="fiche-recette">
-                    <h3 id="titre-recette">Titre</h3>
-                    <ul id="liste-ingredients"></ul>
+                    <h3 id="titre-recette">Titre de la recette</h3>
+
+                    <ul id="liste-ingredients">
+                    </ul>
+
+                    <div class="infos-recette">
+                        <p class="temps">Temps de préparation : <span></span></p>
+                        <p class="cuisson">Temps de cuisson : <span></span></p>
+                        <p class="niveau">Difficulté : <span></span></p>
+                    </div>
+
+                    <div class="etapes">
+                        <h4>Étapes de préparation</h4>
+                        <p class="texte-etapes"></p>
+                    </div>
+
+                    <button class="btn-supprimer-recette" id="btn-supprimer-recette" style="display: none;">Supprimer cette recette
+                  </button>
                 </div>
             </div>
             <img src="/img/image_recette_droit.png" />
 
-            <a href="/html/ajout.html" class="btn btn-primary">Ajouter une recette</a
+            <a href="/html/ajout.html" id="btn-ajout-recette" class="btn btn-primary">Ajouter une recette</a
           >
         </div>
 
@@ -249,14 +266,23 @@
           </div>
           
         </div>
-      </main>
-    </div>
-    <script src="/js/accueil.js"></script>
-  </body>
-  <footer>
-    <p>
-      © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS -
-      Anne Laure PARGUET
-    </p>
-  </footer>
+
+        <div id="lien_reco">
+          <p class="subtitle">Si toutes ces recettes t'ont donné envie ou si les bienfaits de l'ube t'ont convaincu, découvre vite les recommandations de la communauté pour le déguster en boisson ou en gâteau !</p>
+          <a href="/html/recommandation.html" class="btn btn-primary">Voir les recommandations</a>
+        </div>
+        </main>
+        </div>
+
+        <footer>
+            <p>
+                © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET
+            </p>
+        </footer>
+
+        <script src="/js/accueil.js" defer></script>
+        <script src="/js/header.js" defer></script>
+
+</body>
+
 </html>
