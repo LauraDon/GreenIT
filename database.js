@@ -208,6 +208,46 @@ function getRecommandationsByUser(db, userId) {
     });
 }
 
+function getRecetteById(db, id) {
+    return new Promise((resolve, reject) => {
+        db.get("SELECT * FROM RECETTE WHERE id_recette = ?", [id], (err, row) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(row);
+            }
+        });
+    });
+}
+
+function updateRecette(db, id, updatedData) {
+    return new Promise((resolve, reject) => {
+        const {
+            titre,
+            description,
+            urlImage,
+            tempsPreparation,
+            tempsCuisson,
+            niveau_difficulte,
+            ingredients,
+            etapes
+        } = updatedData;
+
+        db.run(`
+            UPDATE RECETTE
+            SET titre = ?, description = ?, urlImage = ?, tempsPreparation = ?, 
+                tempsCuisson = ?, niveau_difficulte = ?, ingredients = ?, etapes = ?
+            WHERE id_recette = ?
+        `, [titre, description, urlImage, tempsPreparation, tempsCuisson, niveau_difficulte, ingredients, etapes, id], function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
 async function main() {
     const db = initializeDatabase();
 
@@ -267,6 +307,8 @@ module.exports = {
     getUtilisateurByEmail,
     deleteRecette,
     deleteRecommandation,
+    getAllRecommandations,
     getRecommandationsByUser,
-    getAllRecommandations
+    updateRecette,
+    getRecetteById
 };

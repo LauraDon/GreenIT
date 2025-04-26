@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async() => {
     const listeLieux = document.getElementById("liste-lieux");
+    const utilisateur = JSON.parse(localStorage.getItem("user")) || {};
 
     try {
         const response = await fetch("/api/recommandations");
@@ -18,7 +19,32 @@ document.addEventListener("DOMContentLoaded", async() => {
               <h3>${lieu.titre}</h3>
               <p><strong>Adresse :</strong> ${lieu.lieu}</p>
               <p><strong>Commentaire :</strong> ${lieu.contenu}</p>
-          `;
+            `;
+
+            // Vérifier si l'utilisateur connecté est l'auteur
+            if (utilisateur && utilisateur.id_utilisateur === lieu.id_utilisateur) {
+                const boutonSupprimer = document.createElement("button");
+                boutonSupprimer.textContent = "Supprimer";
+                boutonSupprimer.classList.add("delete-button");
+                boutonSupprimer.addEventListener("click", async() => {
+                    const confirmation = confirm("Supprimer cette recommandation ?");
+                    if (confirmation) {
+                        try {
+                            const res = await fetch(`/api/recommandations/${lieu.id_recommandation}`, { method: "DELETE" });
+                            if (res.ok) {
+                                alert("Recommandation supprimée !");
+                                location.reload();
+                            } else {
+                                alert("Erreur lors de la suppression.");
+                            }
+                        } catch (err) {
+                            console.error("Erreur lors de la suppression :", err);
+                            alert("Erreur réseau.");
+                        }
+                    }
+                });
+                card.appendChild(boutonSupprimer);
+            }
 
             listeLieux.appendChild(card);
         });
@@ -38,13 +64,3 @@ document.querySelector(".add-button").addEventListener("click", () => {
         window.location.href = "/html/reco_ajout.html";
     }
 });
-
-const logoutButton = document.getElementById('logout-btn');
-
-if (logoutButton) {
-    logoutButton.addEventListener('click', () => {
-        localStorage.removeItem('user');
-        localStorage.setItem('connected', 'false');
-        window.location.href = '/html/connexion.html';
-    });
-}

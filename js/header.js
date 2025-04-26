@@ -24,3 +24,20 @@ if (logoutButton) {
         window.location.href = '/html/connexion.html';
     });
 }
+
+// Bouton "Déconnexion" uniquement si connecté
+const utilisateurConnecte = JSON.parse(localStorage.getItem('user'));
+
+if (logoutButton) {
+    if (utilisateurConnecte && utilisateurConnecte.id_utilisateur) {
+        logoutButton.style.display = "inline-block"; // Afficher si connecté
+    } else {
+        logoutButton.style.display = "none"; // Cacher sinon
+    }
+
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem('user');
+        localStorage.setItem('connected', 'false');
+        window.location.href = '/html/connexion.html';
+    });
+}

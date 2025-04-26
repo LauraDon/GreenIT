@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #f0efeb;
+    background-color: #f8f6ef;
     color: #333;
     line-height: 1.6;
     font-family: "Poppins", sans-serif;
@@ -82,8 +82,8 @@ footer {
 }
 
 h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
+    font-size: 32px;
+    margin: 20px 0;
     color: #573c76;
     text-align: left;
 }
@@ -92,7 +92,7 @@ h2 {
     font-size: 18px;
     font-weight: 400;
     text-align: left;
-    color: #946ab4;
+    color: #a086b5;
 }
 
 footer {
@@ -100,7 +100,7 @@ footer {
     padding: 20px 0;
     font-size: 14px;
     color: #f0efeb;
-    background-color: #573c76;
+    background-color: #61487d;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     margin-top: 40px;
 }
