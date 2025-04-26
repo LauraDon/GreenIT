@@ -36,11 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "/html/connexion.html";
     } else {
       overlayAjout.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
     }
   });
 
   document.getElementById("close-overlay").addEventListener("click", () => {
     overlayAjout.classList.add("hidden");
+    document.body.style.overflow = "";
   });
 
   const form = document.getElementById("form-recommandation");
@@ -91,4 +93,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       message.innerText = "Erreur serveur.";
     }
   });
+});
+
+const hamburger = document.querySelector(".hamburger");
+const navbar = document.getElementById("navbar");
+
+hamburger.addEventListener("click", () => {
+  navbar.classList.toggle("active");
 });
