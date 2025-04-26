@@ -40,3 +40,14 @@ main {
   font-size: 0.95rem;
   line-height: 1.4;
 }
+
+/*Responsive*/
+
+@media (max-width: 768px) {
+  main.container {
+    margin-top: 70px !important;
+    margin-right: 40px !important;
+    margin-bottom: 10px !important;
+    margin-left: 80px !important;
+  }
+}

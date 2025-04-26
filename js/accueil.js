@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     boutonAjout.addEventListener("click", (e) => {
       e.preventDefault(); // Empêche la redirection
       overlayAjout.classList.remove("hidden"); // Affiche l'overlay
+      document.body.style.overflow = "hidden";
     });
   } else {
     boutonAjout.style.display = "none"; // Cache le bouton pour les non-admins
@@ -149,6 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const closeOverlayBtn = document.getElementById("close-overlay");
   closeOverlayBtn.addEventListener("click", () => {
     overlayAjout.classList.add("hidden");
+    document.body.style.overflow = "";
   });
 
   const formRecette = document.getElementById("form-recette");

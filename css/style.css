@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+main {
+  flex: 1;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   background-color: #f0efeb;
   color: #333;
@@ -30,6 +43,7 @@ header {
   color: #f0efeb;
   cursor: pointer;
   z-index: 1001;
+  margin-right: 50px;
 }
 
 .logo {
@@ -59,12 +73,24 @@ nav ul li {
   margin-left: 30px;
 }
 
-nav ul li a {
+nav ul li a,
+nav ul li button {
   text-decoration: none;
   color: #f0efeb;
   font-weight: 500;
   font-size: 18px;
   transition: all 0.3s ease;
+}
+
+nav ul li button {
+  background-color: transparent;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  text-decoration: underline;
+}
+
+nav ul li button:hover {
+  cursor: pointer;
 }
 
 nav ul li a:hover {
@@ -107,17 +133,25 @@ footer {
 
 /*Responsive*/
 
-@media (max-width: 1054px) {
+@media (max-width: 1090px) {
+  header {
+    justify-content: flex-start;
+  }
+
   nav {
     position: absolute;
-    top: 0px;
-    right: 0;
+    top: 9rem;
+    left: 0;
     background-color: #5e3577;
-    width: 30%;
-    display: none;
+    width: 250px;
+    height: 100vh;
+    transform: translateX(-120%);
+    transition: transform 0.3s ease;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0;
+    padding: 3rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
   }
 
   nav ul {
@@ -125,14 +159,14 @@ footer {
   }
 
   nav ul li {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 
   nav.active {
-    display: flex;
+    transform: translateX(0);
   }
   .hamburger {
-    display: block;
+    display: flex;
   }
 }
 
