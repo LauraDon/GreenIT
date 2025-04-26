@@ -28,6 +28,7 @@ main {
 h3 {
   text-align: center;
   margin-bottom: 50px;
+  color: green;
 }
 
 main ul {
@@ -36,7 +37,7 @@ main ul {
 }
 
 main li {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   line-height: 1.5;
   display: flex;
   align-items: center;
@@ -55,4 +56,28 @@ main li img {
   border-top-left-radius: 70px;
   border-bottom-right-radius: 70px;
   left: 0;
+}
+
+@media (max-width: 700px) {
+  main {
+    margin: 70px 40px 30px 40px;
+  }
+  main li img {
+    height: 200px;
+  }
+  main li {
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  main li {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main li img {
+    display: none;
+  }
 }

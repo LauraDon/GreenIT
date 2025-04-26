@@ -28,7 +28,7 @@ main {
   padding: 4rem 2rem;
   width: 400px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -79,4 +79,11 @@ input {
 .register a {
   color: #573c76;
   text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  main {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
 }
