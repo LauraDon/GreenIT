@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ingredientsList = document.getElementById("liste-ingredients");
   const miniatures = document.getElementById("miniatures");
   const boutonSupprimer = document.getElementById("btn-supprimer-recette");
+  const overlayAjout = document.getElementById("overlay-ajout");
 
   let recettes = [];
   let currentIndex = 0;
@@ -133,13 +134,64 @@ document.addEventListener("DOMContentLoaded", async () => {
       boutonSupprimer.style.display = "none";
     }
   }
-});
 
-// Bouton "Ajouter une recette" visible seulement pour l'admin
-const boutonAjout = document.querySelector('a[href="/html/ajout.html"]');
-if (!utilisateur || !utilisateur.estAdmin) {
-  boutonAjout.style.display = "none";
-}
+  // Bouton "Ajouter une recette" visible seulement pour l'admin
+  const boutonAjout = document.querySelector("#btn-ajout-recette");
+  if (utilisateur && utilisateur.estAdmin === 1) {
+    boutonAjout.addEventListener("click", (e) => {
+      e.preventDefault(); // Empêche la redirection
+      overlayAjout.classList.remove("hidden"); // Affiche l'overlay
+    });
+  } else {
+    boutonAjout.style.display = "none"; // Cache le bouton pour les non-admins
+  }
+
+  const closeOverlayBtn = document.getElementById("close-overlay");
+  closeOverlayBtn.addEventListener("click", () => {
+    overlayAjout.classList.add("hidden");
+  });
+
+  const formRecette = document.getElementById("form-recette");
+  if (formRecette) {
+    formRecette.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        titre: form.titre.value,
+        description: form.description.value,
+        urlImage: form.urlImage.value,
+        tempsPreparation: form.tempsPreparation.value,
+        tempsCuisson: form.tempsCuisson.value,
+        niveau_difficulte: form.niveau_difficulte.value,
+        ingredients: form.ingredients.value,
+        etapes: form.etapes.value,
+      };
+
+      try {
+        const res = await fetch("/api/recettes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ recette: data, userId: 1 }), // userId 1 = admin par défaut
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          form.reset();
+          document.getElementById("message").textContent =
+            "Recette ajoutée avec succès ! 🎉";
+        } else {
+          document.getElementById("message").textContent =
+            "Erreur : " + result.error;
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById("message").textContent = "Erreur serveur.";
+      }
+    });
+  }
+});
 
 const bouton = document.getElementById("btn-supprimer-recette");
 if (bouton) {

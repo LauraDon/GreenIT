@@ -186,8 +186,7 @@ html {
   right: -2rem;
 }
 
-.btn-ajouter {
-  color: #482a41;
+#btn-ajout-recette:hover {
   cursor: pointer;
 }
 
@@ -532,6 +531,86 @@ html {
   margin-top: 20px;
 }
 
+/*Overlay*/
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+}
+
+#close-overlay {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+#form-recette {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form-recette input,
+#form-recette textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+#form-recette input:focus,
+#form-recette textarea:focus {
+  border-color: #572e54;
+  outline: none;
+  background-color: #fff9fc;
+}
+
+#form-recette button {
+  margin-top: 10px;
+}
+
+#form-recette button:hover {
+  cursor: pointer;
+}
+
+#message {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #572e54;
+}
+
+button img:hover {
+  cursor: pointer;
+}
+
 /*Responsive*/
 
 @media (max-width: 1464px) {
@@ -850,6 +929,29 @@ html {
   #intro + img,
   #container + img {
     top: 205rem;
+  }
+
+  .overlay-content {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #form-recette {
+    border-radius: 20px;
+    display: flex;
+  }
+
+  .overlay-content h2 {
+    margin-bottom: 50px;
+  }
+
+  #form-recette button {
+    margin-top: 50px;
   }
 }
 
