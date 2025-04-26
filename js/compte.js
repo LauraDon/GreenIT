@@ -40,14 +40,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-
-const logoutButton = document.getElementById('logout-btn');
-
-if (logoutButton) {
-    logoutButton.addEventListener('click', () => {
-        localStorage.removeItem('user');
-        localStorage.setItem('connected', 'false');
-        window.location.href = '/html/connexion.html';
-    });
-}
