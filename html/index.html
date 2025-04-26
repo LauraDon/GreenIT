@@ -14,6 +14,7 @@
     <main>
         <section class="image">
             <header>
+              <button class="hamburger" aria-label="Menu">&#9776;</button>
                 <div class="logo">
                     <a href="/html/index.html"><img src="/img/ubelicious_logo.png" alt="Ubelicious logo - Tasse avec coeur" /></a>
                 </div>
@@ -28,7 +29,6 @@
                         <li><button id="logout-btn">Déconnexion</button></li>
                     </ul>
                 </nav>
-                <button class="hamburger" aria-label="Menu">&#9776;</button>
             </header>
 
             <main class="hero">
@@ -61,7 +61,7 @@
 
             <div class="buttons">
                 <a href="#recette" class="btn btn-primary">Voir les recettes</a>
-                <a href="#histoire" class="btn btn-secondary">Pourquoi l'ube ?</a>
+                <a href="#bienfait" class="btn btn-secondary">Pourquoi l'ube ?</a>
             </div>
         </div>
 
@@ -102,12 +102,12 @@
 
                     <button class="btn-supprimer-recette" id="btn-supprimer-recette" style="display: none;">Supprimer</button>
                     <button class="btn-modifier-recette" id="btn-modifier-recette" style="display: none;margin-left: 1rem;">Modifier</button>
+              
                 </div>
             </div>
             <img src="/img/image_recette_droit.png" />
 
-            <a href="/html/ajout.html" id="btn-ajout-recette" class="btn btn-primary">Ajouter une recette</a
-          >
+            <button id="btn-ajout-recette" class="btn btn-primary">Ajouter une recette </button>
         </div>
 
         <div id="bienfait">
@@ -268,21 +268,75 @@
         </div>
 
         <div id="lien_reco">
-          <p class="subtitle" style="text-align: center; color: #333; font-size: 16px;">Si toutes ces recettes t'ont donné envie ou si les bienfaits de l'ube t'ont convaincu, découvre vite les recommandations de la communauté pour le déguster en boisson ou en gâteau !</p>
+          <p>Si toutes ces recettes t'ont donné envie ou si les bienfaits de l'ube t'ont convaincu, découvre vite les recommandations de la communauté pour le déguster en boisson ou en gâteau !</p>
           <a href="/html/recommandation.html" class="btn btn-primary">Voir les recommandations</a>
         </div>
-        </main>
-        </div>
+      </main>
+    </div>
 
-        <footer>
-            <p>
-                © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS - Anne Laure PARGUET
-            </p>
-        </footer>
+    <footer>
+      <p>
+        © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS -
+        Anne Laure PARGUET
+      </p>
+    </footer>
+    
+    <script src="/js/accueil.js" defer></script>
+    <script src="/js/header.js" defer></script>
 
-        <script src="/js/accueil.js" defer></script>
-        <script src="/js/header.js" defer></script>
+    <div id="overlay-ajout" class="overlay hidden">
+      <div class="overlay-content">
+        <button id="close-overlay">&times;</button>
+        <h2>Ajouter une recette</h2>
 
-</body>
+        <form id="form-recette">
+          <input
+            type="text"
+            name="titre"
+            placeholder="Titre de la recette"
+            required
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            required
+          ></textarea>
+          <input
+            type="text"
+            name="urlImage"
+            placeholder="Lien de l’image (.jpg, .png)"
+            required
+          />
+          <input
+            type="text"
+            name="tempsPreparation"
+            placeholder="Temps de préparation (ex : 30 min)"
+          />
+          <input
+            type="text"
+            name="tempsCuisson"
+            placeholder="Temps de cuisson (ex : 40 min)"
+          />
+          <input
+            type="text"
+            name="niveau_difficulte"
+            placeholder="Niveau (Facile, Moyen, Difficile)"
+          />
+          <textarea
+            name="ingredients"
+            placeholder="Ingrédients (un par ligne)"
+            required
+          ></textarea>
+          <textarea
+            name="etapes"
+            placeholder="Étapes de la recette (numérotées)"
+            required
+          ></textarea>
 
+          <button type="submit" class="btn btn-primary" class="add-button">Ajouter la recette</button>
+          <p id="message"></p>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

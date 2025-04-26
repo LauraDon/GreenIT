@@ -2,10 +2,11 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Mes recommandations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ubelicious - Mes recommandations</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/recommandation.css" />
     <link rel="stylesheet" href="/css/mes_recommandations.css" />
+    <link rel="stylesheet" href="/css/recommandation.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -15,6 +16,7 @@
 
   <body>
     <header>
+      <button class="hamburger" aria-label="Menu">&#9776;</button>
       <div class="logo">
         <a href="/html/index.html"
           ><img
@@ -33,11 +35,11 @@
           <li><button id="logout-btn">Déconnexion</button></li>
         </ul>
       </nav>
-      <button class="hamburger" aria-label="Menu">&#9776;</button>
     </header>
 
     <main class="container">
-      <h1>Mes recommandations</h1>
+      <h2>Mes recommandations</h2>
+      <p class="subtitle">Retrouvez ici vos recommendations !</p>
       <div id="reco-container" class="recommandations-zone">
         <p>Chargement en cours...</p>
       </div>
