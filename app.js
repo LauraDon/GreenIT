@@ -76,6 +76,22 @@ app.get('/api/recommandations', async(req, res) => {
     }
 });
 
+// Récupérer une recette par son ID
+app.get('/api/recettes/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const recette = await db.getRecetteById(database, id);
+
+        if (!recette) {
+            return res.status(404).json({ error: "Recette non trouvée" });
+        }
+        res.json(recette);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
 
 // Ajouter une recommandation
 app.post('/api/recommandations', async(req, res) => {
@@ -168,11 +184,21 @@ app.post('/api/admin/login', async(req, res) => {
     }
 });
 
+// Modifier une recette
+app.put('/api/recettes/:id', async(req, res) => {
+    try {
+        const recetteId = req.params.id;
+        const nouvelleRecette = req.body;
+
+        await db.updateRecette(database, recetteId, nouvelleRecette);
+        res.status(200).json({ message: 'Recette modifiée avec succès' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erreur lors de la mise à jour de la recette' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Serveur en écoute sur http://localhost:${port}`);
-});
-
-app.get('/', (req, res) => {
-    res.send('Bienvenue sur l’API Ubelicious  – Serveur opérationnel.');
 });

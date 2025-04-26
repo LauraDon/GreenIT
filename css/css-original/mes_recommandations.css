@@ -1,0 +1,57 @@
+/* Conteneur général */
+
+.recommandations-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Une carte par recommandation */
+
+.recommandation-card {
+    background-color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #c48bcf;
+    /* violet doux */
+}
+
+
+/* Titre de la recommandation */
+
+.recommandation-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: #563C5C;
+}
+
+
+/* Détails */
+
+.recommandation-card p {
+    margin: 0.3rem 0;
+    color: #333;
+}
+
+.recommandation-card p strong {
+    color: #000;
+}
+
+
+/* Titre principal */
+
+main.container>h1 {
+    text-align: center;
+    color: #563C5C;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
