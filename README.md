@@ -12,10 +12,16 @@ Ubelicious est une plateforme web dédiée à la découverte de l'ube violet (ig
 Le projet intègre une partie **front-end** et une partie **back-end** complète.
 
 ## Déploiement
-Le site est déployé via [Render](https://render.com), avec une application Node.js/Express.js pour le serveur et l'accès à la base de données.
 
-Lien vers le site :  
-**(lien Render)**
+Le projet est déployé sur deux plateformes complémentaires :
+
+- Vercel pour la version optimisée du site vitrine (HTML, CSS, JS minifiés), afin de maximiser les performances écologiques.
+- Render pour démontrer le bon fonctionnement des fonctionnalités dynamiques (connexion à la base de données SQLite).
+
+### Liens :
+- Site optimisé (Vercel) ➔ https://ubelicious-site.vercel.app
+- Démonstration avec base de données (Render) ➔ https://greenit-hryk.onrender.com
+
 
 ## Remarques techniques
 - Ce dépôt contient à la fois :
@@ -34,7 +40,7 @@ Lien vers le site :
 
 ## Structure du projet
 ```
-/ (racine)
+/
 |-- app.js
 |-- database.js
 |-- package.json
@@ -109,12 +115,6 @@ Lien vers le site :
   - `loriana` : développements réalisés par Loriana
   - `laura` :  développements réalisés par Laura
 
-- **Conventions de commit :**
-  - `feat:` ajout de fonctionnalité
-  - `fix:` correction de bug
-  - `docs:` mise à jour de la documentation
-  - `style:` changements purement esthétiques
-
 - **Procédure :**
   - Travailler sur sa propre branche.
   - Faire des pull requests vers `main` après relecture.
@@ -124,7 +124,7 @@ Lien vers le site :
 - Laura DONATO
 - Maël CASTELLAN
 - Rémi DESJARDINS
-- Anne Laure PARQUET
+- Anne Laure PARGUET
 
 ---
 
