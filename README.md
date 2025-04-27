@@ -118,6 +118,61 @@ Le projet est déployé sur deux plateformes complémentaires :
 - **Procédure :**
   - Travailler sur sa propre branche.
   - Faire des pull requests vers `main` après relecture.
+ 
+  ## Tests de fonctionnalités
+
+Des tests de fonctionnalités ont été réalisés avec Cypress pour garantir le bon fonctionnement du site.
+Tous les tests ont été validés sur Firefox, Internet Explorer et Electron.
+
+- **Pages testées :**
+
+  - Page d'accueil (`accueil.cy.js`)
+
+    - Affichage du carrousel de recettes
+    - Gestion de l'affichage du bouton d'ajout (selon rôle admin)
+    - Gestion du menu hamburger
+
+  - Page À propos (`apropos.cy.js`)
+
+    - Présence du texte principal
+    - Gestion du menu hamburger
+
+  - Page Création de compte (`compte.cy.js`)
+
+    - Présence des champs du formulaire d'inscription
+    - Affichage de la force du mot de passe en direct
+    - Navigation entre inscription et connexion
+    - Gestion du menu hamburger
+
+  - Page de connexion (`connexion.cy.js`)
+
+    - Présence des formulaires utilisateur et admin
+    - Affichage/masquage du mot de passe pour chaque formulaire
+    - Navigation entre connexion et création de compte
+    - Gestion du menu hamburger
+
+  - Header général (`header.cy.js`)
+
+    - Redirection dynamique selon l'état de connexion de l'utilisateur
+    - Affichage/masquage du bouton de déconnexion
+
+  - Page Mes recommandations (`mes_recommandations.cy.js`)
+
+    - Affichage des recommandations pour un utilisateur connecté
+    - Message d'information si non connecté
+    - Gestion du menu hamburger
+
+  - Page Recommandations (`recommandation.cy.js`)
+    - Affichage de la liste de lieux recommandés
+    - Accès au formulaire d'ajout pour les utilisateurs connectés
+    - Redirection vers la page de connexion pour les utilisateurs non connectés
+    - Gestion du menu hamburger
+
+- **Lancer les tests de fonctionnalités :**
+  - Installer les dépendences : `npm install cypress`
+  - Lancer le site dans un terminal : `npx serve .`
+  - Lancer Cypress dans un autre terminal : `npm run test`
+  - Sélectionner le navigateur de votre choix puis cliquer sur les fichiers de test pour les exécuter
 
 ## Équipe
 - Loriana RATOVO
