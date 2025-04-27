@@ -1,247 +1,390 @@
-/*
-  Projet: Green IT - Ubelicious
-  Créé par: Maël Castellan, Laura Donato, Rémi Desjardins, Anne-Laure Parguet et Loriana Ratovo
-*/
+const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
+const fs = require("fs");
 
-// Import des modules nécessaires
-const express = require("express");
-const bodyParser = require("body-parser");
-const db = require("./database");
+const dbPath = path.join(__dirname, "ubelicious.db");
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-// Middleware pour parser le JSON et les données URL encodées
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Définir les chemins pour les fichiers statiques (CSS, JS, images, HTML)
-app.use("/css", express.static(__dirname + "/css"));
-app.use("/js", express.static(__dirname + "/js"));
-app.use("/img", express.static(__dirname + "/img"));
-app.use("/html", express.static(__dirname + "/html"));
-
-// Route principale - envoie le fichier index.html
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/html/index.html");
-});
-
-// Initialisation de la base de données
-const database = db.initializeDatabase();
-
-// =================== Routes API ===================
-
-// Récupérer toutes les recettes
-app.get("/api/recettes", async (req, res) => {
-  try {
-    const recettes = await db.getRecettes(database);
-    res.json(recettes);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
-// Rechercher des recettes par mot-clé
-app.get("/api/recettes/search", async (req, res) => {
-  try {
-    const keyword = req.query.q || "";
-    const recettes = await db.searchRecettes(database, keyword);
-    res.json(recettes);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
-// Ajouter une nouvelle recette
-app.post("/api/recettes", async (req, res) => {
-  try {
-    const userId = req.body.userId || 1; // Par défaut, administrateur
-    const recetteId = await db.addRecette(database, req.body.recette, userId);
-    res
-      .status(201)
-      .json({ id: recetteId, message: "Recette ajoutée avec succès" });
-  } catch (error) {
-    console.error(error);
-    if (error.message.includes("administrateurs")) {
-      res.status(403).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: "Erreur serveur" });
+function initializeDatabase() {
+  const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error("Erreur lors de l'ouverture de la base de données", err);
+      return;
     }
-  }
-});
+    console.log("Base de données connectée");
 
-// Récupérer les recommandations d'un utilisateur spécifique
-app.get("/api/recommandations/utilisateur/:id", async (req, res) => {
-  try {
-    const recommandations = await db.getRecommandationsByUser(
-      database,
-      req.params.id
+    db.run("PRAGMA foreign_keys = ON");
+    const schemaSQL = fs.readFileSync(
+      path.join(__dirname, "schema.sql"),
+      "utf8"
     );
-    res.json(recommandations);
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ error: "Erreur récupération recommandations utilisateur" });
-  }
-});
+    db.exec(schemaSQL, (err) => {
+      if (err) {
+        console.error("Erreur lors de l'exécution du schéma:", err);
+        return;
+      }
 
-// Récupérer toutes les recommandations
-app.get("/api/recommandations", async (req, res) => {
-  try {
-    const recommandations = await db.getAllRecommandations(database);
-    console.log("RECOMMANDATIONS :", recommandations);
-    res.json(recommandations);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur récupération des recommandations" });
-  }
-});
-
-// Récupérer une recette par son ID
-app.get("/api/recettes/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const recette = await db.getRecetteById(database, id);
-
-    if (!recette) {
-      return res.status(404).json({ error: "Recette non trouvée" });
-    }
-    res.json(recette);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
-// Ajouter une recommandation
-app.post("/api/recommandations", async (req, res) => {
-  try {
-    const { titre, lieu, contenu, id_utilisateur } = req.body;
-
-    if (!titre || !lieu || !contenu || !id_utilisateur) {
-      return res.status(400).json({ error: "Champs manquants" });
-    }
-
-    await db.addRecommandation(database, {
-      titre,
-      lieu,
-      contenu,
-      id_utilisateur,
+      console.log("Schéma de base de données créé");
+      const insertAdmin = `
+          INSERT OR IGNORE INTO UTILISATEUR 
+          (nom_user, prenom_user, nomUtilisateur, email, mdp, estAdmin) 
+          VALUES (?, ?, ?, ?, ?, ?)
+        `;
+      db.run(
+        insertAdmin,
+        [
+          "Admin",
+          "System",
+          "admin",
+          "admin@ubelicious.com",
+          "motdepassehash",
+          1,
+        ],
+        function (err) {
+          if (err) {
+            console.error("Erreur lors de l'ajout de l'admin:", err);
+          } else if (this.changes > 0) {
+            console.log("Utilisateur admin créé avec l'ID:", this.lastID);
+          } else {
+            console.log("Admin déjà existant");
+          }
+        }
+      );
     });
-    res.status(201).json({ message: "Recommandation ajoutée avec succès" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
+  });
 
-// Créer un compte utilisateur
-app.post("/api/register", async (req, res) => {
-  const { nom, prenom, email, password } = req.body;
+  return db;
+}
 
-  if (!nom || !prenom || !email || !password) {
-    return res.status(400).json({ message: "Tous les champs sont requis." });
-  }
-
-  try {
-    const utilisateur = await db.createUtilisateur(
-      database,
-      nom,
-      prenom,
-      email,
-      password
+function getUtilisateurs(db) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      "SELECT id_utilisateur, nom_user, prenom_user, nomUtilisateur, email, estAdmin FROM UTILISATEUR",
+      (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      }
     );
-    res.status(201).json({ message: "Compte créé avec succès", utilisateur });
-  } catch (error) {
-    console.error("Erreur création utilisateur:", error.message);
-    res
-      .status(500)
-      .json({ message: "Erreur serveur lors de la création du compte." });
-  }
-});
+  });
+}
 
-// Supprimer une recette
-app.delete("/api/recettes/:id", async (req, res) => {
+function getUtilisateurByEmail(db, email) {
+  return new Promise((resolve, reject) => {
+    db.get("SELECT * FROM UTILISATEUR WHERE email = ?", [email], (err, row) => {
+      if (err) reject(err);
+      else resolve(row);
+    });
+  });
+}
+
+function createUtilisateur(db, nom, prenom, email, password) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `
+            INSERT INTO UTILISATEUR (nom_user, prenom_user, nomUtilisateur, email, mdp, estAdmin)
+            VALUES (?, ?, ?, ?, ?, 0)
+        `,
+      [nom, prenom, `${prenom}.${nom}`.toLowerCase(), email, password],
+      function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve({
+            id_utilisateur: this.lastID,
+            nom_user: nom,
+            prenom_user: prenom,
+            email,
+            estAdmin: 0,
+          });
+        }
+      }
+    );
+  });
+}
+
+function getRecettes(db, limit = 10) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `
+      SELECT r.*, u.nomUtilisateur as auteur
+      FROM RECETTE r
+      JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+      ORDER BY r.dateCreation DESC
+      LIMIT ?
+    `,
+      [limit],
+      (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      }
+    );
+  });
+}
+
+function addRecette(db, recetteData, userId) {
+  return new Promise((resolve, reject) => {
+    db.get(
+      "SELECT estAdmin FROM UTILISATEUR WHERE id_utilisateur = ?",
+      [userId],
+      (err, row) => {
+        if (err) {
+          return reject(err);
+        }
+
+        if (!row || row.estAdmin !== 1) {
+          return reject(
+            new Error("Seuls les administrateurs peuvent ajouter des recettes")
+          );
+        }
+
+        const {
+          titre,
+          description,
+          urlImage,
+          tempsPreparation,
+          tempsCuisson,
+          niveau_difficulte,
+          ingredients,
+          etapes,
+        } = recetteData;
+
+        db.run(
+          `
+        INSERT INTO RECETTE (
+          titre, description, urlImage, tempsPreparation, tempsCuisson, 
+          niveau_difficulte, ingredients, etapes, id_utilisateur
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+          [
+            titre,
+            description,
+            urlImage,
+            tempsPreparation,
+            tempsCuisson,
+            niveau_difficulte,
+            ingredients,
+            etapes,
+            userId,
+          ],
+          function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(this.lastID);
+            }
+          }
+        );
+      }
+    );
+  });
+}
+
+function addRecommandation(db, recommandation) {
+  const { titre, lieu, contenu, id_utilisateur } = recommandation;
+
+  return new Promise((resolve, reject) => {
+    db.run(
+      `
+            INSERT INTO RECOMMANDATION (titre, lieu, contenu, id_utilisateur, dateCreation)
+            VALUES (?, ?, ?, ?, datetime('now'))
+        `,
+      [titre, lieu, contenu, id_utilisateur],
+      function (err) {
+        if (err) reject(err);
+        else resolve(this.lastID);
+      }
+    );
+  });
+}
+
+function deleteRecette(db, id) {
+  return new Promise((resolve, reject) => {
+    db.run("DELETE FROM RECETTE WHERE id_recette = ?", [id], function (err) {
+      if (err) reject(err);
+      else resolve();
+    });
+  });
+}
+
+function deleteRecommandation(db, id) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      "DELETE FROM RECOMMANDATION WHERE id_recommandation = ?",
+      [id],
+      function (err) {
+        if (err) reject(err);
+        else resolve();
+      }
+    );
+  });
+}
+
+function getAllRecommandations(db) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `
+          SELECT r.*, u.nomUtilisateur as auteur
+          FROM RECOMMANDATION r
+          JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+          ORDER BY r.dateCreation DESC
+        `,
+      (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      }
+    );
+  });
+}
+
+function getRecommandationsByUser(db, userId) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `
+            SELECT r.*, u.nomUtilisateur as auteur
+            FROM RECOMMANDATION r
+            JOIN UTILISATEUR u ON r.id_utilisateur = u.id_utilisateur
+            WHERE r.id_utilisateur = ?
+            ORDER BY r.dateCreation DESC
+        `,
+      [userId],
+      (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      }
+    );
+  });
+}
+
+function getRecetteById(db, id) {
+  return new Promise((resolve, reject) => {
+    db.get("SELECT * FROM RECETTE WHERE id_recette = ?", [id], (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}
+
+function updateRecette(db, id, updatedData) {
+  return new Promise((resolve, reject) => {
+    const {
+      titre,
+      description,
+      urlImage,
+      tempsPreparation,
+      tempsCuisson,
+      niveau_difficulte,
+      ingredients,
+      etapes,
+    } = updatedData;
+
+    db.run(
+      `
+            UPDATE RECETTE
+            SET titre = ?, description = ?, urlImage = ?, tempsPreparation = ?, 
+                tempsCuisson = ?, niveau_difficulte = ?, ingredients = ?, etapes = ?
+            WHERE id_recette = ?
+        `,
+      [
+        titre,
+        description,
+        urlImage,
+        tempsPreparation,
+        tempsCuisson,
+        niveau_difficulte,
+        ingredients,
+        etapes,
+        id,
+      ],
+      function (err) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      }
+    );
+  });
+}
+
+async function main() {
+  const db = initializeDatabase();
+
   try {
-    await db.deleteRecette(database, req.params.id);
-    res.status(200).json({ message: "Recette supprimée" });
-  } catch (error) {
-    res.status(500).json({ error: "Erreur suppression recette" });
-  }
-});
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-// Supprimer une recommandation
-app.delete("/api/recommandations/:id", async (req, res) => {
-  try {
-    await db.deleteRecommandation(database, req.params.id);
-    res.status(200).json({ message: "Recommandation supprimée" });
-  } catch (error) {
-    res.status(500).json({ error: "Erreur suppression recommandation" });
-  }
-});
+    const utilisateurs = await getUtilisateurs(db);
+    console.log("Utilisateurs:", utilisateurs);
 
-// Connexion utilisateur
-app.post("/api/login", async (req, res) => {
-  const { email, motDePasse } = req.body;
+    if (utilisateurs.some((u) => u.estAdmin === 1)) {
+      const adminId = utilisateurs.find((u) => u.estAdmin === 1).id_utilisateur;
 
-  try {
-    const utilisateur = await db.getUtilisateurByEmail(database, email);
+      try {
+        const recetteId = await addRecette(
+          db,
+          {
+            titre: "Gâteau à l'ube (Ube Cake)",
+            description:
+              "Un délicieux gâteau philippin à base d'ube, une igname violette qui donne une saveur douce et une couleur vibrante",
+            urlImage: "/images/ube-cake.jpg",
+            tempsPreparation: "30 minutes",
+            tempsCuisson: "40 minutes",
+            niveau_difficulte: "Moyen",
+            ingredients:
+              "200g de purée d'ube 250g de farine\n150 g de sucre\n100 g de beurre ramolli\n3 œufs\n10 cl de lait de coco\n1 cuillère à café d'extrait de vanille\n1 cuillère à café de levure chimique",
+            etapes:
+              "1. Préchauffer le four à 180°C (thermostat 6)\n2. Mélanger le beurre ramolli et le sucre jusqu'à obtenir une texture crémeuse\n3. Ajouter les œufs un par un, en mélangeant bien entre chaque ajout\n4. Incorporer la purée d'ube et l'extrait de vanille\n5. Dans un autre bol, mélanger la farine, la levure et le sel\n6. Incorporer progressivement le mélange de farine à la préparation d'ube, en alternant avec le lait de coco\n7. Verser la pâte dans un moule à gâteau beurré et fariné\n8. Cuire au four pendant 40 minutes, jusqu'à ce qu'un couteau inséré au centre ressorte propre\n9. Laisser refroidir avant de démouler et de servir",
+          },
+          adminId
+        );
 
-    if (!utilisateur || utilisateur.motDePasse !== motDePasse) {
-      return res.status(401).json({ error: "Identifiants incorrects" });
+        console.log("Recette ajoutée avec l'ID:", recetteId);
+      } catch (error) {
+        console.error("Erreur lors de l'ajout de la recette:", error);
+      }
     }
-
-    res.json({ message: "Connexion réussie", utilisateur });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur:", error);
+  } finally {
+    db.close((err) => {
+      if (err) {
+        console.error(
+          "Erreur lors de la fermeture de la base de données:",
+          err
+        );
+      } else {
+        console.log("Connexion à la base de données fermée");
+      }
+    });
   }
-});
+}
 
-// Connexion administrateur
-app.post("/api/admin/login", async (req, res) => {
-  const { email, motDePasse } = req.body;
+if (require.main === module) {
+  main();
+}
 
-  try {
-    const utilisateur = await db.getUtilisateurByEmail(database, email);
-
-    if (
-      !utilisateur ||
-      utilisateur.motDePasse !== motDePasse ||
-      utilisateur.estAdmin !== 1
-    ) {
-      return res
-        .status(401)
-        .json({ error: "Identifiants incorrects ou non administrateur" });
-    }
-
-    res.json({ message: "Connexion administrateur réussie", utilisateur });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
-// Modifier une recette existante
-app.put("/api/recettes/:id", async (req, res) => {
-  try {
-    const recetteId = req.params.id;
-    const nouvelleRecette = req.body;
-
-    await db.updateRecette(database, recetteId, nouvelleRecette);
-    res.status(200).json({ message: "Recette modifiée avec succès" });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la mise à jour de la recette" });
-  }
-});
-
-// =================== Lancement du serveur ===================
-app.listen(port, () => {
-  console.log(`Serveur en écoute sur http://localhost:${port}`);
-});
+module.exports = {
+  initializeDatabase,
+  getUtilisateurs,
+  createUtilisateur,
+  getRecettes,
+  addRecette,
+  addRecommandation,
+  getUtilisateurByEmail,
+  deleteRecette,
+  deleteRecommandation,
+  getAllRecommandations,
+  getRecommandationsByUser,
+  updateRecette,
+  getRecetteById,
+};
