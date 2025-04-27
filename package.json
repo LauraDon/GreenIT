@@ -1,12 +1,14 @@
 {
     "dependencies": {
-        "body-parser": "^2.2.0",
-        "express": "^5.1.0",
-        "sqlite3": "^5.1.7"
+      "body-parser": "^2.2.0",
+      "express": "^5.1.0",
+      "sqlite3": "5.1.2"
+    },
+    "scripts": {
+      "test": "cypress open",
+      "test:run": "cypress run"
     },
     "devDependencies": {
-        "postcss": "^8.5.3",
-        "postcss-cli": "^11.0.1",
-        "purgecss": "^7.0.2"
+      "cypress": "^14.3.2"
     }
-}
+  }
