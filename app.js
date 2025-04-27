@@ -40,18 +40,6 @@ app.get("/api/recettes", async (req, res) => {
   }
 });
 
-// API : rechercher des recettes par mot-clé
-app.get("/api/recettes/search", async (req, res) => {
-  try {
-    const keyword = req.query.q || "";
-    const recettes = await db.searchRecettes(database, keyword);
-    res.json(recettes);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
 // API : ajouter une recette
 app.post("/api/recettes", async (req, res) => {
   try {
