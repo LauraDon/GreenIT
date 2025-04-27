@@ -110,10 +110,19 @@ Le projet est déployé sur deux plateformes complémentaires :
   - Site adapté pour mobile, tablette et desktop.
 
 ## Conventions de contribution
-- **Branches de travail :**
-  - `main` : branche principale (stabilisée)
-  - `loriana` : développements réalisés par Loriana
-  - `laura` :  développements réalisés par Laura
+- **Branche de travail :**
+  - `main` : branche principale
+
+- **Convention de commit :**
+    - `git clone <url-du-depot>`: récupération d'un dépôt distant en local
+    - `git add <fichier>`: ajout de fichiers au staging area
+    - `git add .`: ajout de tous les fichiers motifiés au staging area
+    - `git commit -m "feat: ton message de commit"`: enregistrement des modifications avec un message
+    - `git push origin <nom-de-la-branche>`: envoi des commits locaux vers le dépôt distant
+    - `git pull origin <nom-de-la-branche>`: récupération et fusion des modifications du dépôt distant
+    - `git fetch origin`: récupération des modifications du dépôt distant sans fusion
+    - `git checkout <nom-de-la-branche>`: basculement ou création d'une branche / restauration d'un fichier
+    - `git checkout -b <nouvelle-branche>`: créer et aller directement sur une nouvelle branche
 
 - **Procédure :**
   - Travailler sur sa propre branche.
@@ -169,10 +178,10 @@ Tous les tests ont été validés sur Firefox, Internet Explorer et Electron.
     - Gestion du menu hamburger
 
 - **Lancer les tests de fonctionnalités :**
-  - Installer les dépendences : `npm install cypress`
-  - Lancer le site dans un terminal : `npx serve .`
+  - Installer les dépendences : `npm install cypress` puis `npm install -g serve`
+  - Lancer le site dans un terminal : `serve .`
   - Lancer Cypress dans un autre terminal : `npm run test`
-  - Sélectionner le navigateur de votre choix puis cliquer sur les fichiers de test pour les exécuter
+  - Sélectionner E2E Testing puis le navigateur de votre choix, et enfin cliquer sur les fichiers de test pour les exécuter
 
 ## Équipe
 - Loriana RATOVO
