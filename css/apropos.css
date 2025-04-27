@@ -1,3 +1,8 @@
+/*
+  Projet: Green IT - Ubelicious
+  Créé par: Maël Castellan, Laura Donato, Rémi Desjardins, Anne-Laure Parguet et Loriana Ratovo
+*/
+
 header {
   background-image: linear-gradient(
       to right,
@@ -13,71 +18,72 @@ header {
 }
 
 main {
-    margin: 70px 80px 30px 80px;
+  margin: 70px 80px 30px 80px;
 }
 
 .apropos-container {
-    max-width: 900px;
-    margin: 3rem auto;
-    padding: 0 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 2rem;
 }
 
 .subtitle {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 h3 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: green;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  color: green;
 }
 
 main ul {
-    list-style-type: none;
-    margin-bottom: 70px;
+  list-style-type: none;
+  margin-bottom: 70px;
 }
 
 main li {
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
 }
 
 main li strong {
-    font-weight: 500;
-    color: #573c76;
+  font-weight: 500;
+  color: #573c76;
 }
 
 main li img {
-    height: 300px;
-    width: auto;
-    border-top-left-radius: 70px;
-    border-bottom-right-radius: 70px;
-    left: 0;
+  height: 300px;
+  width: auto;
+  border-top-left-radius: 70px;
+  border-bottom-right-radius: 70px;
+  left: 0;
 }
 
 @media (max-width: 700px) {
-    main {
-        margin: 70px 40px 30px 40px;
-    }
-    main li img {
-        height: 200px;
-    }
-    main li {
-        margin-bottom: 3rem;
-        gap: 2rem;
-    }
+  main {
+    margin: 70px 40px 30px 40px;
+  }
+  main li img {
+    height: 200px;
+  }
+  main li {
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 540px) {
-    main li {
-        display: flex;
-        flex-direction: column;
-    }
-    main li img {
-        display: none;
-    }
+  main li {
+    display: flex;
+    flex-direction: column;
+  }
+  main li img {
+    display: none;
+  }
 }

@@ -1,3 +1,8 @@
+<!--
+  Projet: Green IT - Ubelicious
+  Créé par: Maël Castellan, Laura Donato, Rémi Desjardins, Anne-Laure Parguet et Loriana Ratovo
+-->
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -72,9 +77,11 @@
         <div id="recette">
             <h2>Nos recettes à base d'ube</h2>
             <p class="subtitle" id="p">Pâtisseries, boissons et douceurs maison</p>
-            <img src="/img/image_recette_gauche.png" alt="Image décorative" />
-            <div class="recette-zone">
-                <div>
+            <div id="carrousel-recette">
+              <img src="/img/image_recette_gauche.png" alt="Image décorative" />
+              <div class="recette-zone">
+                <div id="contenant-carrousel-recette">
+                  <div id="contenant-carrousel">
                     <div class="carrousel-box">
                         <button class="carousel-btn left">&#10094;</button>
                         <div class="carousel" id="carousel"></div>
@@ -100,12 +107,16 @@
                         <p class="texte-etapes"></p>
                     </div>
 
-                    <button class="btn-supprimer-recette" id="btn-supprimer-recette" style="display: none;">Supprimer</button>
-                    <button class="btn-modifier-recette" id="btn-modifier-recette" style="display: none;margin-left: 1rem;">Modifier</button>
+                    <button class="btn-supprimer-recette" id="btn-supprimer-recette" style="display: none; background-color:transparent; border: none; margin-top:10px;"><img src="/img/supprimer_icone.png" alt="Supprimer la recette" style="width: 30px; height:30px;"/></button>
+                    <button class="btn-modifier-recette" id="btn-modifier-recette" style="display: none;margin-left: 1rem; background-color:transparent; border: none; margin-top:10px;"><img src="/img/modifier_icone.png" alt="Modifier la recette" style="width: 30px; height:30px;"/></button>
               
                 </div>
+                </div>
+                <img src="/img/image_recette_droit.png" />
             </div>
-            <img src="/img/image_recette_droit.png" />
+            </div>
+            
+            
 
             <button id="btn-ajout-recette" class="btn btn-primary">Ajouter une recette </button>
         </div>
@@ -120,82 +131,85 @@
                 il est aussi bon pour ton corps que pour ton moral.
               </p>
             </div>
-            <img src="/img/bienfait_gauche.png" alt="Image décorative" />
 
-            <div id="container">
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/sparkles.svg" />
-                    <h3>Antioxydant naturel</h3>
+            <div id="card-img">
+              <div class="image_bienfait"><img src="/img/bienfait_gauche.png" alt="Image décorative" /></div>
+              <div id="container">
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/sparkles.svg" />
+                      <h3>Antioxydant naturel</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Aide à protéger tes cellules du stress oxydatif</p>
+                    </div>
                   </div>
-                  <div class="card-face card-back">
-                    <p>Aide à protéger tes cellules du stress oxydatif</p>
+                </div>
+  
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/leaf.svg" />
+                      <h3>Riche en fibre</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Favorise le transit et la digestion naturelle</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/sun.svg" />
+                      <h3>Boost de vitamines</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Idéal pour l'immunité et une belle peau</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/zap.svg" />
+                      <h3>Apport en énergie</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Un snack naturel qui donne la pêche</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/sprout.svg" />
+                      <h3>100% naturel</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Sans colorants ni conservateurs</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card">
+                  <div class="card-inner">
+                    <div class="card-face card-front">
+                      <img src="/img/icone_svg/heart-pulse.svg" />
+                      <h3>Index glycémique modéré</h3>
+                    </div>
+                    <div class="card-face card-back">
+                      <p>Des desserts gourmands mais équilibrés</p>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/leaf.svg" />
-                    <h3>Riche en fibre</h3>
-                  </div>
-                  <div class="card-face card-back">
-                    <p>Favorise le transit et la digestion naturelle</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/sun.svg" />
-                    <h3>Boost de vitamines</h3>
-                  </div>
-                  <div class="card-face card-back">
-                    <p>Idéal pour l'immunité et une belle peau</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/zap.svg" />
-                    <h3>Apport en énergie</h3>
-                  </div>
-                  <div class="card-face card-back">
-                    <p>Un snack naturel qui donne la pêche</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/sprout.svg" />
-                    <h3>100% naturel</h3>
-                  </div>
-                  <div class="card-face card-back">
-                    <p>Sans colorants ni conservateurs</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-inner">
-                  <div class="card-face card-front">
-                    <img src="/img/icone_svg/heart-pulse.svg" />
-                    <h3>Index glycémique modéré</h3>
-                  </div>
-                  <div class="card-face card-back">
-                    <p>Des desserts gourmands mais équilibrés</p>
-                  </div>
-                </div>
-              </div>
+              <div class="image_bienfait"><img src="/img/bienfait_droit.png" alt="Image décorative" /></div>
             </div>
-            <img src="/img/bienfait_droit.png" alt="Image décorative" />
+            
           </section>
         </div>
 
@@ -277,7 +291,7 @@
     <footer>
       <p>
         © 2024 Loriana RATOVO - Laura DONATO - Maël CASTELLAN - Rémi DESJARDINS -
-        Anne Laure PARGUET
+        Anne-Laure PARGUET
       </p>
     </footer>
     
@@ -338,5 +352,27 @@
         </form>
       </div>
     </div>
+
+    <div id="overlay-modif" class="overlay hidden">
+      <div class="overlay-content">
+        <button id="close-overlay-modif">&times;</button>
+        <h2>Modifier la recette</h2>
+    
+        <form id="form-modifier-recette">
+          <input type="text" id="modif-titre" required />
+          <textarea id="modif-description" required></textarea>
+          <input type="text" id="modif-urlImage" />
+          <input type="text" id="modif-tempsPreparation" />
+          <input type="text" id="modif-tempsCuisson" />
+          <input type="text" id="modif-niveau_difficulte" />
+          <textarea id="modif-ingredients" required></textarea>
+          <textarea id="modif-etapes" required></textarea>
+    
+          <button type="submit" class="btn btn-primary">Modifier la recette</button>
+          <p id="message-modif"></p>
+        </form>
+      </div>
+    </div>
+    
   </body>
 </html>
