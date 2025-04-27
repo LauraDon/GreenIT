@@ -1,60 +1,90 @@
+/*
+  Projet: Green IT - Ubelicious
+  Créé par: Maël Castellan, Laura Donato, Rémi Desjardins, Anne-Laure Parguet et Loriana Ratovo
+*/
 
+// Attend que le DOM soit chargé
 document.addEventListener("DOMContentLoaded", async () => {
-  const listeLieux = document.getElementById("liste-lieux");
-  const utilisateur = JSON.parse(localStorage.getItem("user")) || {};
-  const overlayAjout = document.getElementById("overlay-ajout");
+  const listeLieux = document.getElementById("liste-lieux"); // Conteneur des lieux
+  const utilisateur = JSON.parse(localStorage.getItem("user")) || {}; // Récupère l'utilisateur connecté
+  const overlayAjout = document.getElementById("overlay-ajout"); // Overlay pour ajouter une recommandation
 
   try {
+    // Récupère toutes les recommandations via l'API
     const response = await fetch("/api/recommandations");
     const lieux = await response.json();
 
+    // Si aucune recommandation disponible
     if (lieux.length === 0) {
       listeLieux.innerHTML = "<p>Aucun lieu recommandé pour le moment.</p>";
       return;
     }
 
+    // Affiche chaque lieu sous forme de carte
     lieux.forEach((lieu) => {
       const card = document.createElement("div");
       card.classList.add("lieu-card");
 
+      // Remplit la carte avec les informations du lieu
       card.innerHTML = `
               <h3>${lieu.titre}</h3>
               <p><strong>Adresse :</strong> ${lieu.lieu}</p>
               <p><strong>Commentaire :</strong> ${lieu.contenu}</p>
             `;
 
-            // Vérifier si l'utilisateur connecté est l'auteur
-            if (utilisateur && utilisateur.id_utilisateur === lieu.id_utilisateur) {
-                const boutonSupprimer = document.createElement("button");
-                boutonSupprimer.textContent = "Supprimer";
-                boutonSupprimer.classList.add("delete-button");
-                boutonSupprimer.addEventListener("click", async() => {
-                    const confirmation = confirm("Supprimer cette recommandation ?");
-                    if (confirmation) {
-                        try {
-                            const res = await fetch(`/api/recommandations/${lieu.id_recommandation}`, { method: "DELETE" });
-                            if (res.ok) {
-                                alert("Recommandation supprimée !");
-                                location.reload();
-                            } else {
-                                alert("Erreur lors de la suppression.");
-                            }
-                        } catch (err) {
-                            console.error("Erreur lors de la suppression :", err);
-                            alert("Erreur réseau.");
-                        }
-                    }
-                });
-                card.appendChild(boutonSupprimer);
-            }
+      // Si l'utilisateur connecté est un administrateur
+      if (utilisateur && utilisateur.estAdmin === 1) {
+        const boutonSupprimer = document.createElement("button");
+        boutonSupprimer.innerHTML =
+          '<img src="/img/supprimer_icone.png" alt="Supprimer" />';
+        boutonSupprimer.style.backgroundColor = "transparent";
+        boutonSupprimer.style.border = "none";
+        boutonSupprimer.style.marginTop = "40px";
+        boutonSupprimer.style.cursor = "pointer";
+        boutonSupprimer.classList.add("delete-button");
 
+        const imageBouton = boutonSupprimer.querySelector("img");
+        imageBouton.style.width = "30px";
+        imageBouton.style.height = "30px";
+        imageBouton.style.position = "absolute";
+        imageBouton.style.bottom = "2.1rem";
+
+        // Ajoute un événement pour supprimer la recommandation
+        boutonSupprimer.addEventListener("click", async () => {
+          const confirmation = confirm("Supprimer cette recommandation ?");
+          if (confirmation) {
+            try {
+              const res = await fetch(
+                `/api/recommandations/${lieu.id_recommandation}`,
+                { method: "DELETE" }
+              );
+              if (res.ok) {
+                alert("Recommandation supprimée !");
+                location.reload();
+              } else {
+                alert("Erreur lors de la suppression.");
+              }
+            } catch (err) {
+              console.error("Erreur lors de la suppression :", err);
+              alert("Erreur réseau.");
+            }
+          }
+        });
+
+        // Ajoute le bouton à la carte
+        card.appendChild(boutonSupprimer);
+      }
+
+      // Ajoute la carte dans la liste
       listeLieux.appendChild(card);
     });
   } catch (error) {
+    // En cas d'erreur lors du chargement
     console.error("Erreur lors du chargement des lieux :", error);
     listeLieux.innerHTML = "<p>Erreur de chargement des lieux.</p>";
   }
 
+  // Gère l'ouverture de l'overlay d'ajout
   document.querySelector(".add-button").addEventListener("click", () => {
     const isConnected = localStorage.getItem("connected") === "true";
 
@@ -67,11 +97,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  // Gère la fermeture de l'overlay d'ajout
   document.getElementById("close-overlay").addEventListener("click", () => {
     overlayAjout.classList.add("hidden");
     document.body.style.overflow = "";
   });
 
+  // Gestion du formulaire d'ajout d'une nouvelle recommandation
   const form = document.getElementById("form-recommandation");
   const message = document.getElementById("message");
 
@@ -83,6 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // Lors de la soumission du formulaire
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -90,12 +123,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const lieu = form.elements["description"].value.trim();
     const contenu = form.elements["commentaire"].value.trim();
 
+    // Vérifie que tous les champs sont remplis
     if (!titre || !lieu || !contenu) {
       message.innerText = "Tous les champs sont obligatoires.";
       return;
     }
 
     try {
+      // Envoie la nouvelle recommandation au serveur
       const res = await fetch("/api/recommandations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -110,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const result = await res.json();
 
       if (res.ok) {
-        window.location.href = "/html/recommandation.html";
+        window.location.href = "/html/recommandation.html"; // Redirige après ajout
         form.reset();
       } else {
         message.innerText = result.error || "Erreur lors de l’ajout.";
@@ -122,6 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
+// Gestion du menu hamburger pour afficher/masquer la navbar
 const hamburger = document.querySelector(".hamburger");
 const navbar = document.getElementById("navbar");
 

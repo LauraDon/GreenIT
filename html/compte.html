@@ -1,3 +1,8 @@
+<!--
+  Projet: Green IT - Ubelicious
+  Créé par: Maël Castellan, Laura Donato, Rémi Desjardins, Anne-Laure Parguet et Loriana Ratovo
+-->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -42,52 +47,96 @@
 
       <div class="login-container">
         <div class="login-box">
-          <input type="text" id="nom" name="nom" required placeholder="Nom" />
-          <input
-            type="text"
-            id="prenom"
-            name="prenom"
-            required
-            placeholder="Prénom"
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            placeholder="Mot de passe"
-          />
-          <input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            required
-            placeholder="Confirmer le mot de passe"
-          />
-          <button type="submit" class="btn-connect">Se connecter</button>
-
-          <p class="register">
-            Déjà un compte ?
-            <a href="/html/connexion.html">Connectez-vous !</a>
-          </p>
-        </div>
+          <form id="register-form">
+            <input type="text" id="nom" name="nom" required placeholder="Nom" autocomplete="name"/>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              required
+              placeholder="Prénom"
+              autocomplete="given-name"
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Email"
+              autocomplete="email"
+            />
+            <div>
+              <div class="password-field">
+                <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                placeholder="Mot de passe"
+                autocomplete="new-password"
+              />
+              <img
+                src="/img/oeil_ouvert.png"
+                alt="Afficher le mot de passe"
+                class="toggle-password"
+                data-target="password"
+              />
+              </div>
+              <div
+                id="password-strength"
+                style="
+                  height: 8px;
+                  width: 100%;
+                  background-color: #ccc;
+                  border-radius: 5px;
+                  margin-bottom: 10px;
+                "
+              >
+                <div
+                  id="password-strength-bar"
+                  style="
+                    height: 100%;
+                    width: 0%;
+                    background-color: red;
+                    border-radius: 5px;
+                  "
+                ></div>
+              </div>
+            </div>
+            <div class="password-field">
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+                placeholder="Confirmer le mot de passe"
+                autocomplete="new-password"
+              />
+              <img
+                src="/img/oeil_ouvert.png"
+                alt="Afficher le mot de passe"
+                class="toggle-password"
+                data-target="confirm-password"
+              />
+            </div>
+            <button type="submit" class="btn-connect">Créer son compte</button>
+  
+            <p class="register">
+              Déjà un compte ?
+              <a href="/html/connexion.html">Connectez-vous !</a>
+            </p>
+          </div>
+          </form>
       </div>
     </main>
 
     <footer>
       <p>
         © 2024 Loriana RATOVO – Laura DONATO – Maël CASTELLAN – Rémi DESJARDINS
-        – Anne Laure PARQUET
+        – Anne-Laure PARQUET
       </p>
     </footer>
-    <script src="/js/compte.js"></script>
+    <script src="/js/compte.js" defer></script>
     <script src="/js/header.js" defer></script>
   </body>
 </html>
